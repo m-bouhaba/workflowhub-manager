@@ -1,0 +1,28 @@
+{
+  "Recettes": [
+    {
+      "id": "1",
+      "titre": "Couscous Royal",
+      "pays": "Maroc",
+      "categorie": "Plat traditionnel",
+      "image": "https://res.cloudinary.com/djnqthl9y/image/upload/v1764082671/2148081051_hgdtly.jpg",
+      "description": "Un plat marocain emblématique composé de semoule légère, de légumes mijotés et d'une variété de viandes.",
+      "ingredients": [
+        "500g de semoule de couscous",
+        "Poulet, agneau et merguez",
+        "Carottes, courgettes, navets, potiron",
+        "Pois chiches",
+        "Oignons",
+        "Épices (ras el hanout, curcuma, gingembre)",
+        "Huile d'olive"
+      ],
+      "etapes": [
+        "Préparer la semoule et la travailler à la main.",
+        "Faire revenir les oignons et les viandes dans l'huile.",
+        "Ajouter les épices et les légumes.",
+        "Laisser mijoter doucement.",
+        "Servir la semoule dans un grand plat et disposer les légumes et viandes par-dessus."
+      ]
+    }
+    ]
+}
