@@ -1,23 +1,44 @@
-import { useState } from "react";
-import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./Pages/Home";
-import Trash from "./Pages/Trash";
-import Login from "./Pages/Login";
+
+import { useState } from 'react';
+import TaskModal from './Components/AddEditPopup';
 
 function App() {
-  return (
-    <>
-      <BrowserRouter>
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentTask, setCurrentTask] = useState(null); 
 
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Navbar/>
-          <Route path="/home" element={<Home />} />
-          <Route path="/trash" element={<Trash />} />
-        </Routes>
-      </BrowserRouter>
-    </>
+  const handleAddNew = () => {
+    setCurrentTask(null); 
+    setIsModalOpen(true);
+  };
+
+  const handleEditTicket = (task) => {
+    setCurrentTask(task); // Fill form with task data
+    setIsModalOpen(true);
+  };
+
+  const saveTask = (taskData) => {
+    if (taskData.id) {
+      console.log("Updating task:", taskData);
+    } else {
+      console.log("Creating new task:", taskData);
+    }
+    
+    setIsModalOpen(false); 
+  };
+
+  return (
+    <div className="App">
+      <button onClick={handleAddNew} style={{padding: '20px', margin: '50px'}}>
+        + Add New Ticket
+      </button>
+
+      <TaskModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)}
+        onSave={saveTask}
+        taskToEdit={currentTask}
+      />
+    </div>
   );
 }
 
