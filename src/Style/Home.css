@@ -1,0 +1,13 @@
+body{
+    background: linear-gradient(180deg, #D9EAFD 0%, #FFFFFF 100%);
+}
+
+.home{
+    width: 100%;
+}
+
+.columns{
+    display: flex;
+    gap: 20px;
+    justify-content: space-around;
+}
