@@ -1,0 +1,92 @@
+
+.task-card {
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  font-family: sans-serif;
+}
+
+.task-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* Pastel Colors based on Priority */
+.pastel-pink {
+  background-color: #ffeaea; /* Light Red/Pink for High */
+  border-left: 5px solid #ff6b6b;
+}
+
+.pastel-cream {
+  background-color: #fff9e6; /* Light Yellow/Cream for Medium */
+  border-left: 5px solid #ffcc00;
+}
+
+.pastel-green {
+  background-color: #eafff0; /* Light Green for Low */
+  border-left: 5px solid #00c851;
+}
+
+/* Card Header */
+.task-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.task-title {
+  margin: 0;
+  font-size: 1rem;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Action Buttons */
+.actions {
+  display: flex;
+  gap: 5px;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 5px;
+  border-radius: 50%;
+  transition: background 0.2s;
+  opacity: 0.6;
+}
+
+.icon-btn:hover {
+  background-color: rgba(0,0,0,0.05);
+  opacity: 1;
+}
+
+/* Description */
+.task-desc {
+  font-size: 0.85rem;
+  color: #555;
+  margin: 0;
+  line-height: 1.4;
+  /* Limit text to 3 lines */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Footer info */
+.task-footer {
+  margin-top: auto;
+  font-size: 0.75rem;
+  color: #777;
+  display: flex;
+  justify-content: flex-end;
+}

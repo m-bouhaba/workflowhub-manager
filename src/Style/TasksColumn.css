@@ -1,0 +1,67 @@
+/* TasksColumn.css */
+
+.column {
+  /* Using flex: 1 to make columns equal width */
+  flex: 1; 
+  display: flex;
+  flex-direction: column;
+  min-width: 300px; /* Prevent squishing on small screens */
+  background-color: transparent; /* Assuming board background covers it */
+  border-radius: 12px;
+  font-family: sans-serif;
+}
+
+/* The Dark Blue Headers */
+.column-header {
+  background-color: #104e8b; /* Dark Blue */
+  color: white;
+  padding: 15px 20px;
+  border-radius: 12px; /* Rounded corners all around */
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+/* Different header colors if you want strict status matching */
+/* .header-todo { background-color: #104e8b; } */
+/* .header-in-progress { background-color: #104e8b; } */
+/* .header-done { background-color: #104e8b; } */
+
+.column-body {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Spacing between tickets */
+}
+
+.empty-msg {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  margin-top: 20px;
+}
+
+/* The Add Task Button at the bottom of the To Do column */
+.add-task-trigger {
+  background-color: white;
+  border: 2px dashed #a0c4e3; /* Dashed light blue border */
+  border-radius: 12px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  color: #104e8b;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.add-task-trigger:hover {
+  background-color: #eef6fc;
+  border-color: #104e8b;
+}
+
+.plus-icon {
+  font-size: 1.5rem;
+  line-height: 0;
+  font-weight: normal;
+}
