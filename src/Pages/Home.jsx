@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+
 
 export default function Home() {
   return (
-    <div>
-      
-    </div>
-  )
+    <div style={{ textAlign: "center", marginTop: "100px" }}>
+      <h2>Home Page</h2>
+      <p>Welcome to WorkflowHub!</p>
+
+    </div> 
+  );
 }
