@@ -1,0 +1,109 @@
+/* Darkens the background behind the modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+}
+
+/* The actual card from your image */
+.modal-container {
+  /* Matches the blue gradient in your image */
+  background: linear-gradient(180deg, #104e8b 0%, #7db9e8 100%);
+  padding: 25px;
+  border-radius: 15px;
+  width: 400px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  color: white;
+  font-family: sans-serif;
+  position: relative;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Close 'X' button */
+.close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+}
+
+/* Styling inputs to match the "pill" shape in the image */
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 0.9rem;
+  background-color: white;
+  color: #333;
+  width: 100%; /* Ensure they fill the container */
+  box-sizing: border-box; /* Prevents padding from breaking width */
+}
+
+/* Resize handling for textarea */
+.form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Button Styling */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.add-btn {
+  background-color: #0d3c61; /* Darker blue for button */
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.add-btn:hover {
+  background-color: #062640;
+}
+
+/* Optional: Visual cues for priority dropdown text */
+.priority-select.high { border-left: 5px solid red; }
+.priority-select.medium { border-left: 5px solid gold; }
+.priority-select.low { border-left: 5px solid limegreen; }
