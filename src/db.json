@@ -6,14 +6,14 @@
       "description": "Create the UI layout for the login screen",
       "priority": "high",
       "status": "todo",
-      "order": 1
+      "order": 0
     },
     {
       "id": "2",
       "title": "API integration",
-      "description": "Connect frontend with the API endpoints",
-      "priority": "medium",
+      "priority": "high",
       "status": "in-progress",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio delectus ipsa pariatur tempora dolorum voluptatum magnam, odit similique quo esse officiis sed explicabo quidem velit, natus autem ea, cupiditate id!",
       "order": 1
     },
     {
@@ -41,19 +41,20 @@
       "order": 1
     },
     {
-      "id": "1765443333014",
-      "title": "title",
-      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio delectus ipsa pariatur tempora dolorum voluptatum magnam, odit similique quo esse officiis sed explicabo quidem velit, natus autem ea, cupiditate id!"
+      "id": "f0f0",
+      "title": "figma design",
+      "priority": "high",
+      "status": "in-progress",
+      "description": "description about the figma design",
+      "order": 2
     },
     {
-      "id": "1765443346030",
-      "title": "vadsba",
-      "description": "asdasdbasdfad"
-    },
-    {
-      "id": "1765443551906",
-      "title": "rwehwertwer",
-      "description": "twerhwertrw"
+      "id": "ad9c",
+      "title": "test",
+      "priority": "medium",
+      "status": "done",
+      "description": "asdbasrf3e",
+      "order": 2
     }
   ],
   "trash": [
