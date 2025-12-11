@@ -1,24 +1,34 @@
+import React from "react";
+import "../Style/TaskTicket.css";
+
 const TaskTicket = ({ task, onEdit, onDelete }) => {
+  
   const getColorClass = () => {
-    if (task.priority === "Urgent") return "pastel-pink";
-    if (task.priority === "Medium") return "pastel-cream";
-    return "pastel-green";
+    const priority = task.priority ? task.priority.toLowerCase() : 'low';
+    if (priority === "high") return "card-pink";
+    if (priority === "medium") return "card-cream";
+    return "card-green"; 
   };
 
   return (
-    <div className={`task-card ${getColorClass()}`}>
-      <div className="task-head">
+    <div 
+      className={`task-card ${getColorClass()}`} 
+      onClick={onEdit} 
+    >
+      <div className="card-header">
         <h4 className="task-title">{task.title}</h4>
-        <div>
-          <button className="icon-btn" onClick={onEdit}>✏️</button>
-          <button className="icon-btn" onClick={onDelete}>🗑️</button>
-        </div>
+        <button 
+          className="delete-btn" 
+          onClick={(e) => {
+             e.stopPropagation(); 
+             onDelete(); 
+          }}
+        >
+          🗑️
+        </button>
       </div>
 
       <p className="task-desc">{task.description}</p>
-      <p style={{ fontSize: "12px", marginTop: "6px", color: "#2e5f6f" }}>
-        Priority: <b>{task.priority}</b>
-      </p>
     </div>
   );
 };
