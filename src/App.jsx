@@ -7,14 +7,12 @@ import Login from "./Pages/Login";
 function App() {
   return (
     <Router>
-      <div className="App">
         <Routes>
           <Route path="/" element={<Login />} />
           {/* <Navbar/> */}
           <Route path="/home" element={<Home />} />
           <Route path="/trash" element={<Trash />} />
         </Routes>
-      </div>
     </Router>
   );
 }
