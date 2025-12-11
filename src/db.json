@@ -1,12 +1,35 @@
 {
   "tasks": [
     {
-      "id": "1",
-      "title": "Design login page",
-      "description": "Create the UI layout for the login screen",
-      "priority": "high",
+      "id": "3",
+      "title": "Fix navbar bug",
+      "description": "Navbar not closing on mobile session",
+      "priority": "low",
       "status": "todo",
+      "order": 2
+    },
+    {
+      "id": "102",
+      "title": "Deleted",
+      "priority": "low",
+      "status": "in-progress",
+      "description": "Remove outdated doc files from the project",
       "order": 1
+    },
+    {
+      "id": "1765443333014",
+      "title": "title",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio delectus ipsa pariatur tempora dolorum voluptatum magnam, odit similique quo esse officiis sed explicabo quidem velit, natus autem ea, cupiditate id!"
+    },
+    {
+      "id": "1765443346030",
+      "title": "vadsba",
+      "description": "asdasdbasdfad"
+    },
+    {
+      "id": "1765443551906",
+      "title": "rwehwertwer",
+      "description": "twerhwertrw"
     },
     {
       "id": "2",
@@ -15,14 +38,6 @@
       "priority": "medium",
       "status": "in-progress",
       "order": 1
-    },
-    {
-      "id": "3",
-      "title": "Fix navbar bug",
-      "description": "Navbar not closing on mobile session",
-      "priority": "low",
-      "status": "todo",
-      "order": 2
     },
     {
       "id": "4",
@@ -48,7 +63,7 @@
       "description": "Remove outdated doc files from the project",
       "priority": "low",
       "status": "todo",
-      "order": 2
+      "order": 1
     },
     {
       "id": "104",
@@ -56,6 +71,30 @@
       "description": "Remove outdated doc files from the project",
       "priority": "low",
       "status": "todo",
+      "order": 2
+    },
+    {
+      "id": "1765443505607",
+      "title": "2342",
+      "priority": "medium",
+      "status": "in-progress",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio delectus ipsa pariatur tempora dolorum voluptatum magnam, odit similique quo esse officiis sed explicabo quidem velit, natus autem ea, cupiditate id!",
+      "order": 3
+    },
+    {
+      "id": "1765443526834",
+      "title": "erhw",
+      "priority": "high",
+      "status": "done",
+      "description": "twerhwer",
+      "order": 4
+    },
+    {
+      "id": "1",
+      "title": "Design login page",
+      "priority": "high",
+      "status": "in-progress",
+      "description": "Create the UI layout for the login screen",
       "order": 1
     }
   ]
