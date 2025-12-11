@@ -1,0 +1,77 @@
+.TrashPage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;   /* centre vertical */
+  align-items: center;       
+  height: 100vh;
+}
+
+.TrashContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60%;
+  height: 80vh;
+  border: 1px solid gray;
+  background-color: white;
+  border-radius: 12px;
+  padding: 36px;
+  overflow-y: auto;
+}
+
+.ImageLoader{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+ .SearchInput {
+  /* width: 100%; */
+  padding: 12px;
+  margin-bottom: 10px;
+      /* margin-left: 28px; */
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+} 
+
+.TaskList {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+}
+
+.TaskCard {
+  padding: 15px;
+  /* width: 100%; */
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  font-family: sans-serif;
+}
+
+.ContentCard{
+
+}
+
+.TaskActions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.ActionIcon {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.ActionIcon:hover {
+  transform: scale(1.15);
+}
