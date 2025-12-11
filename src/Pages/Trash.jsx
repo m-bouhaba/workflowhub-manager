@@ -2,15 +2,22 @@ import React, { useState, useEffect } from "react";
 import "../Style/Trash.css";
 import axios from "axios";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
+import ConfirmationModal from "../Components/ConfirmPopup"; 
 
 export default function Trash() {
   const [search, setSearch] = useState("");
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // --- Modal State ---
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+  const [confirmAction, setConfirmAction] = useState({ type: null, taskId: null });
+
+  const API_URL = "http://localhost:5000"; 
+
   useEffect(() => {
     axios
-      .get("http://localhost:5000/trash")
+      .get(`${API_URL}/trash`)
       .then((res) => {
         const sorted = res.data.sort((a, b) => a.order - b.order);
         setData(sorted);
@@ -19,13 +26,28 @@ export default function Trash() {
       .finally(() => setLoading(false));
   }, []);
 
-  const handleRestore = async (id) => {
+  // --- 1. Initiate Actions (Open Modal) ---
+  const initiateRestore = (id) => {
+    setConfirmAction({ type: 'restore', taskId: id });
+    setIsConfirmOpen(true);
+  };
+
+  const initiatePermanentDelete = (id) => {
+    setConfirmAction({ type: 'delete', taskId: id });
+    setIsConfirmOpen(true);
+  };
+
+  // --- 2. Execute Actions (API Calls) ---
+  const executeRestore = async () => {
+    const id = confirmAction.taskId;
     try {
       const task = data.find((t) => t.id === id);
       if (!task) return;
 
-      await axios.post("http://localhost:5000/tasks", task);
-      await axios.delete(`http://localhost:5000/trash/${id}`);
+      // Add back to tasks
+      await axios.post(`${API_URL}/tasks`, task);
+      // Remove from trash
+      await axios.delete(`${API_URL}/trash/${id}`);
 
       setData(data.filter((t) => t.id !== id));
     } catch (error) {
@@ -33,17 +55,27 @@ export default function Trash() {
     }
   };
 
-  // DELETE DEFINITIF
-  const handlePermanentDelete = async (id) => {
+  const executePermanentDelete = async () => {
+    const id = confirmAction.taskId;
     try {
-      await axios.delete(`http://localhost:5000/trash/${id}`);
+      await axios.delete(`${API_URL}/trash/${id}`);
       setData(data.filter((t) => t.id !== id));
     } catch (error) {
       console.log("Erreur delete :", error);
     }
   };
 
-  // Filtrage des tâches
+  // --- 3. Confirm Handler (Passed to Modal) ---
+  const handleConfirm = () => {
+    if (confirmAction.type === 'restore') {
+      executeRestore();
+    } else if (confirmAction.type === 'delete') {
+      executePermanentDelete();
+    }
+    // Modal closes automatically via onClose in the component
+  };
+
+  // Filter Tasks
   const filtered = data.filter((task) =>
     task.title.toLowerCase().includes(search.toLowerCase())
   );
@@ -59,7 +91,7 @@ export default function Trash() {
 
     // Save new order to JSON-server
     for (let i = 0; i < items.length; i++) {
-      await axios.patch(`http://localhost:5000/trash/${items[i].id}`, {
+      await axios.patch(`${API_URL}/trash/${items[i].id}`, {
         order: i,
       });
     }
@@ -113,19 +145,19 @@ export default function Trash() {
                                 </div>
 
                                 <div className="TaskActions">
+                                  {/* Restore Icon - Triggers Modal */}
                                   <img
                                     src="/restore.png"
                                     alt="Restore"
                                     className="ActionIcon"
-                                    onClick={() => handleRestore(task.id)}
+                                    onClick={() => initiateRestore(task.id)}
                                   />
+                                  {/* Delete Icon - Triggers Modal */}
                                   <img
                                     src="/delete.png"
                                     alt="Delete permanently"
                                     className="ActionIcon"
-                                    onClick={() =>
-                                      handlePermanentDelete(task.id)
-                                    }
+                                    onClick={() => initiatePermanentDelete(task.id)}
                                   />
                                 </div>
                               </div>
@@ -142,6 +174,14 @@ export default function Trash() {
           </>
         )}
       </div>
+
+      {/* The Confirmation Modal */}
+      <ConfirmationModal
+        isOpen={isConfirmOpen}
+        onClose={() => setIsConfirmOpen(false)}
+        onConfirm={handleConfirm}
+        actionType={confirmAction.type}
+      />
     </div>
   );
 }

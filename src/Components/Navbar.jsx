@@ -5,16 +5,23 @@ import "../Style/Navbar.css";
 const Navbar = () => {
   return (
     <nav className="navbar">
-      <Link to="/home" className="navbar-left">
-        <img src="/logoTrello.png" className="navbar-logo" alt="WorkflowHub Logo" />
-        <h1 className="navbar-title">WorkflowHub</h1>
-      </Link>
-      <div className="navbar-right">
-        <p className="welcome">Welcome , User !</p>
-        <Link to="/trash" className="trash-wrapper">
+
+      {/* LEFT: Logo + Welcome */}
+      <div className="left-section">
+        <Link to="/home" className="logo-wrapper">
+          <img src="/logoTrello.png" alt="Logo" className="navbar-logo" />
+        </Link>
+
+        <p className="welcome-text">Welcome , User !</p>
+      </div>
+
+      {/* RIGHT: Trash Icon */}
+      <div className="right-section">
+        <Link to="/trash">
           <i className="fa-solid fa-trash trash-icon"></i>
         </Link>
       </div>
+
     </nav>
   );
 };
