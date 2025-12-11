@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import '../Style/AddEditPopup.css';
 
 const TaskModal = ({ isOpen, onClose, onSave, taskToEdit }) => {
-  // State for form fields
   const [title, setTitle] = useState('');
   const [priority, setPriority] = useState('medium');
   const [status, setStatus] = useState('todo');
@@ -10,37 +9,33 @@ const TaskModal = ({ isOpen, onClose, onSave, taskToEdit }) => {
 
   useEffect(() => {
     if (taskToEdit) {
-      // EDIT 
-      setTitle(taskToEdit.title);
-      setPriority(taskToEdit.priority);
-      setStatus(taskToEdit.status);
-      setDescription(taskToEdit.description);
+      setTitle(taskToEdit.title || '');
+      setPriority(taskToEdit.priority || 'medium');
+      setStatus(taskToEdit.status || 'todo');
+      setDescription(taskToEdit.description || '');
     } else {
-      // ADD 
       setTitle('');
-      setPriority('medium');
-      setStatus('todo');
+      setPriority('medium'); 
+      setStatus('todo');    
       setDescription('');
     }
   }, [taskToEdit, isOpen]);
 
-  // Don't render anything if modal is closed
   if (!isOpen) return null;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    // Create the task object
+
     const taskData = {
       id: taskToEdit ? taskToEdit.id : null, 
-      title,
-      priority,
-      status, 
-      description,
-      order: taskToEdit ? taskToEdit.order : 1 //By Default 
+      title: title,
+      priority: priority, 
+      status: status, 
+      description: description,
+      order: taskToEdit ? taskToEdit.order : 0 
     };
 
-    onSave(taskData); 
+    onSave(taskData);
   };
 
   return (
@@ -53,7 +48,7 @@ const TaskModal = ({ isOpen, onClose, onSave, taskToEdit }) => {
 
         <form onSubmit={handleSubmit}>
           
-          {/* Title Input */}
+          {/* Title */}
           <div className="form-group">
             <label>Title</label>
             <input 
@@ -61,16 +56,16 @@ const TaskModal = ({ isOpen, onClose, onSave, taskToEdit }) => {
               value={title} 
               onChange={(e) => setTitle(e.target.value)} 
               required 
+              placeholder="Enter task title..."
             />
           </div>
 
-          {/* Priority Dropdown */}
+          {/* Priority */}
           <div className="form-group">
             <label>Priority</label>
             <select 
               value={priority} 
               onChange={(e) => setPriority(e.target.value)}
-              className={`priority-select ${priority}`} // Adds class for color logic
             >
               <option value="high">High</option>
               <option value="medium">Medium</option>
@@ -78,30 +73,33 @@ const TaskModal = ({ isOpen, onClose, onSave, taskToEdit }) => {
             </select>
           </div>
 
-          {/* Status Dropdown */}
+          {/* Status */}
           <div className="form-group">
             <label>Status</label>
-            <select value={status} onChange={(e) => setStatus(e.target.value)}>
+            <select 
+              value={status} 
+              onChange={(e) => setStatus(e.target.value)}
+            >
               <option value="todo">To Do</option>
-              {/* Value matches JSON 'in-progress', Label is 'Doing' as requested */}
-              <option value="in-progress">Doing</option>
+              <option value="in-progress">In Progress</option>
               <option value="done">Done</option>
             </select>
           </div>
 
-          {/* Description Text Area */}
+          {/* Description */}
           <div className="form-group">
             <label>Description</label>
             <textarea 
               value={description} 
               onChange={(e) => setDescription(e.target.value)}
               rows="4"
+              placeholder="Enter details..."
             ></textarea>
           </div>
 
           <div className="modal-footer">
             <button type="submit" className="add-btn">
-              {taskToEdit ? 'SAVE CHANGES' : 'ADD'}
+              {taskToEdit ? 'SAVE CHANGES' : 'ADD TASK'}
             </button>
           </div>
 

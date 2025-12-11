@@ -1,12 +1,20 @@
 {
   "tasks": [
     {
+      "id": "2",
+      "title": "API integration",
+      "priority": "high",
+      "status": "in-progress",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio delectus ipsa pariatur tempora dolorum voluptatum magnam, odit similique quo esse officiis sed explicabo quidem velit, natus autem ea, cupiditate id!",
+      "order": 0
+    },
+    {
       "id": "3",
       "title": "Fix navbar bug",
       "description": "Navbar not closing on mobile session",
       "priority": "low",
       "status": "todo",
-      "order": 2
+      "order": 1
     },
     {
       "id": "102",
@@ -14,7 +22,7 @@
       "priority": "low",
       "status": "in-progress",
       "description": "Remove outdated doc files from the project",
-      "order": 1
+      "order": 0
     },
     {
       "id": "1765443333014",
@@ -46,6 +54,14 @@
       "priority": "medium",
       "status": "done",
       "order": 1
+    },
+    {
+      "id": "1",
+      "title": "Design login page",
+      "priority": "high",
+      "status": "todo",
+      "description": "Create the UI layout for the login screen",
+      "order": 0
     }
   ],
   "trash": [
@@ -63,39 +79,36 @@
       "description": "Remove outdated doc files from the project",
       "priority": "low",
       "status": "todo",
-      "order": 1
+      "order": 2
     },
     {
       "id": "104",
       "title": "maryam",
-      "description": "Remove outdated doc files from the project",
-      "priority": "low",
-      "status": "todo",
-      "order": 2
+      "order": 1
     },
     {
-      "id": "1765443505607",
-      "title": "2342",
-      "priority": "medium",
+      "id": "102",
+      "title": "Deleted",
+      "priority": "low",
       "status": "in-progress",
-      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio delectus ipsa pariatur tempora dolorum voluptatum magnam, odit similique quo esse officiis sed explicabo quidem velit, natus autem ea, cupiditate id!",
+      "description": "Remove outdated doc files from the project",
       "order": 3
     },
     {
-      "id": "1765443526834",
-      "title": "erhw",
+      "id": "f0f0",
+      "title": "Cigma design",
       "priority": "high",
       "status": "done",
-      "description": "twerhwer",
+      "description": "description about the Cigma design",
       "order": 4
     },
     {
-      "id": "1",
-      "title": "Design login page",
-      "priority": "high",
-      "status": "in-progress",
-      "description": "Create the UI layout for the login screen",
-      "order": 1
+      "id": "ad9c",
+      "title": "test",
+      "priority": "medium",
+      "status": "done",
+      "description": "asdbasrf3e",
+      "order": 5
     }
   ]
 }
