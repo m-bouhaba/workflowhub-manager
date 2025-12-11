@@ -32,20 +32,27 @@
       "status": "done",
       "order": 1
     }
-    
   ],
   "trash": [
     {
-      "id": "102",
+      "id": "101",
+      "title": "Old documentation cleanup",
+      "description": "Remove outdated doc files from the project",
+      "priority": "low",
+      "status": "todo",
+      "order": 0
+    },
+    {
+      "id": "103",
       "title": "deleted",
       "description": "Remove outdated doc files from the project",
       "priority": "low",
       "status": "todo",
-      "order": 1
+      "order": 2
     },
     {
-      "id": "101",
-      "title": "Old documentation cleanup",
+      "id": "104",
+      "title": "maryam",
       "description": "Remove outdated doc files from the project",
       "priority": "low",
       "status": "todo",
