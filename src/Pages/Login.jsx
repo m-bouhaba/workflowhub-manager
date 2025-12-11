@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import '../Style/Login.css';
+
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(""); 
+
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,7 +20,7 @@ export default function Login() {
       setError("Incorrect username, email, or password");
     } else {
       setError("");
-      alert("Login successful!");
+      navigate("/home");   
     }
   };
 
@@ -27,11 +31,9 @@ export default function Login() {
         <img src="/login.png" alt="WorkflowHub Logo" />
       </div>
 
-      
       <div className='form-container'>
         <form className='login-form' onSubmit={handleSubmit}>
           
-
           <label>Username:</label>
           <input type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder="Enter username" />
 
@@ -49,6 +51,7 @@ export default function Login() {
     </div>
   );
 }
+
 
 
  

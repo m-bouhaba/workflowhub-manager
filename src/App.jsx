@@ -5,6 +5,7 @@ import { useState } from "react";
  import Trash from "./Pages/Trash";
 import Login from "./Pages/Login";
 import Navbar from "./Components/Navbar";
+import Footer from "./Components/Footer";
 
  function App() {
    return (
@@ -13,10 +14,10 @@ import Navbar from "./Components/Navbar";
        <Navbar/> 
         <Routes>
           <Route path="/" element={<Login />} />
-           
           <Route path="/home" element={<Home />} />
           <Route path="/trash" element={<Trash />} />
         </Routes>
+        
       </BrowserRouter>
      </>
    );
