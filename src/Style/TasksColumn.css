@@ -1,67 +1,54 @@
-/* TasksColumn.css */
-
 .column {
-  /* Using flex: 1 to make columns equal width */
-  flex: 1; 
+  flex: 1;
   display: flex;
   flex-direction: column;
-  min-width: 300px; /* Prevent squishing on small screens */
-  background-color: transparent; /* Assuming board background covers it */
-  border-radius: 12px;
-  font-family: sans-serif;
 }
 
-/* The Dark Blue Headers */
 .column-header {
-  background-color: #104e8b; /* Dark Blue */
+  background-color: #104e8b; /* Dark Blue from screenshot */
   color: white;
   padding: 15px 20px;
-  border-radius: 12px; /* Rounded corners all around */
-  font-size: 1.1rem;
-  font-weight: bold;
-  margin-bottom: 15px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 20px;
 }
-
-/* Different header colors if you want strict status matching */
-/* .header-todo { background-color: #104e8b; } */
-/* .header-in-progress { background-color: #104e8b; } */
-/* .header-done { background-color: #104e8b; } */
 
 .column-body {
   display: flex;
   flex-direction: column;
-  gap: 15px; /* Spacing between tickets */
+  gap: 15px;
 }
 
-.empty-msg {
-  text-align: center;
-  color: #666;
-  font-style: italic;
-  margin-top: 20px;
-}
-
-/* The Add Task Button at the bottom of the To Do column */
-.add-task-trigger {
+/* The Add Task Button Style */
+.add-task-btn {
   background-color: white;
-  border: 2px dashed #a0c4e3; /* Dashed light blue border */
   border-radius: 12px;
-  padding: 15px;
+  padding: 15px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
   color: #104e8b;
   font-weight: 600;
-  transition: all 0.2s;
+  font-size: 1rem;
+  transition: transform 0.2s;
 }
 
-.add-task-trigger:hover {
-  background-color: #eef6fc;
-  border-color: #104e8b;
+.add-task-btn:hover {
+  transform: translateY(-2px);
 }
 
-.plus-icon {
+.plus-box {
+  width: 30px;
+  height: 30px;
+  border: 2px solid #104e8b;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 1.5rem;
   line-height: 0;
-  font-weight: normal;
+  color: #104e8b;
 }
