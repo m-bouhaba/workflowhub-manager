@@ -2,6 +2,8 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  background-color: #d9eafd;
+  border-radius: 12px;
 }
 
 .column-header {
@@ -34,6 +36,7 @@
   font-weight: 600;
   font-size: 1rem;
   transition: transform 0.2s;
+  margin: 0px 5px 10px 5px;
 }
 
 .add-task-btn:hover {
@@ -51,4 +54,7 @@
   font-size: 1.5rem;
   line-height: 0;
   color: #104e8b;
+}
+.addIcon{
+  height: 25px;
 }
