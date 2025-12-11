@@ -1,0 +1,131 @@
+.login-container {
+  display: flex;
+  height: 100vh;
+  border: 1px solid #f5f1f1;
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+
+  
+}
+
+.image-container {
+  width: 60%;
+  height: 100%;
+  margin-left: 10px;
+  margin-right: 10px;
+  
+}
+
+.image-container img {
+  width: 110%;
+  height: 100%;
+  object-fit: cover; 
+  margin-bottom: 10px; 
+  color:transparent;
+  animation: animate 12s linear infinite;
+  
+}
+@keyframes animate {
+  0% { transform: scale(1) translateY(0); }
+  50% { transform: scale(1.05) translateY(-20px); }
+  100% { transform: scale(1) translateY(0); }
+
+    
+}
+
+.form-container {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 100PX;
+}
+
+.login-form {
+  width: 80%;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: rgb(62, 62, 142);
+  
+
+}
+
+
+ 
+.login-form input {
+  width: 85%;
+  padding: 15px;
+  margin: 3px 1px;
+  background: transparent;  
+  border: 2px solid rgb(72, 82, 162) ;
+  border-radius: 10px;              
+  font-size: 16px;
+  color: #43439c;
+  outline: none;
+  box-shadow: 0 0 5px rgba(92, 92, 174, 0.4);
+  font-family:Arial, Helvetica, sans-serif;
+ 
+}
+
+.login-form input::placeholder {
+  color: #e3e3eb;
+  
+}
+
+
+
+
+
+.login-form button {
+  width: 40%;
+  padding: 14px;
+  margin-top: 20px;
+  margin-left: 120px;
+  text-align: center;
+  background: #315e92; 
+  color: white;
+  font-size: 15px;
+  font-weight: 400;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family:Arial, Helvetica, sans-serif;
+  
+}
+
+
+.login-form button:hover {
+  background: #3a78c2;
+  box-shadow: 0 4px 10px rgba(74, 144, 226, 0.4);
+}
+
+
+
+.login-form button:hover {
+  background-color: rgb(93, 155, 202);
+
+}
+ .login-form label {
+  margin-top: 20px;
+  border: 1px solid transparent ;
+  color: #2d4f8d;
+  font-size: 20PX;
+  font-style:normal; 
+  font-family:Arial, Helvetica, sans-serif;
+  margin-bottom: 10px;
+
+  
+}
+.error-message {
+  color: red;
+  font-size: 16px;
+  margin-top: 16px;
+  margin-bottom: 6px;
+}
+
