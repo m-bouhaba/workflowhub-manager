@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import Navbar from "./Components/Navbar";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
@@ -37,7 +37,6 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* 4. Pass the count and the refresh function to Main */}
       <Main 
         username={username} 
         setUsername={setUsername} 
@@ -50,19 +49,34 @@ function App() {
 
 function Main({ username, setUsername, trashCount, refreshTrash }) {
   const location = useLocation();
+  const navigate = useNavigate(); // Hook for redirection
   const showNavbar = location.pathname !== "/"; 
+
+  // --- LOGOUT FUNCTION ---
+  const handleLogout = () => {
+    localStorage.removeItem("username"); // Clear storage
+    setUsername(""); // Clear state
+    navigate("/"); // Redirect to login
+  };
 
   return (
     <>
-      {/* 5. Pass count to Navbar */}
-      {showNavbar && <Navbar username={username} trashCount={trashCount} />}
+      {/* Pass trashCount AND onLogout to Navbar */}
+      {showNavbar && (
+        <Navbar 
+          username={username} 
+          trashCount={trashCount} 
+          onLogout={handleLogout} 
+        />
+      )}
+      
       <Routes>
         <Route path="/" element={<Login setUsername={setUsername} />} />
         
-        {/* 6. Pass refresh function to Home (so it updates when you delete) */}
+        {/* Pass refresh function to Home */}
         <Route path="/home" element={<Home onTrashUpdate={refreshTrash} />} />
         
-        {/* Optional: Pass to Trash if you want count to update on restore/delete permanently */}
+        {/* Pass refresh function to Trash */}
         <Route path="/trash" element={<Trash onTrashUpdate={refreshTrash} />} />
       </Routes>
     </>

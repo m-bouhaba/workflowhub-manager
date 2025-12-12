@@ -1,77 +1,21 @@
 {
   "tasks": [
     {
-      "id": "2",
-      "title": "API integration",
-      "priority": "high",
-      "status": "in-progress",
-      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio delectus ipsa pariatur tempora dolorum voluptatum magnam, odit similique quo esse officiis sed explicabo quidem velit, natus autem ea, cupiditate id!",
-      "order": 0
-    },
-    {
-      "id": "3",
-      "title": "Fix navbar bug",
-      "description": "Navbar not closing on mobile session",
-      "priority": "low",
-      "status": "todo",
-      "order": 1
-    },
-    {
-      "id": "1765443333014",
-      "title": "title",
-      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio delectus ipsa pariatur tempora dolorum voluptatum magnam, odit similique quo esse officiis sed explicabo quidem velit, natus autem ea, cupiditate id!"
-    },
-    {
-      "id": "1765443346030",
-      "title": "vadsba",
-      "description": "asdasdbasdfad"
-    },
-    {
-      "id": "1765443551906",
-      "title": "rwehwertwer",
-      "description": "twerhwertrw"
-    },
-    {
-      "id": "4",
-      "title": "Write unit tests",
-      "description": "Add tests for the task manager module",
+      "id": "cb34",
+      "title": "task 1",
       "priority": "medium",
-      "status": "done",
+      "status": "in-progress",
+      "description": "asdbasdfa fds afdsf asdbsb adff gsdf asdv asd\nasdbasdfa fds afdsf asdbsb adff gsdf asdv asd\nasdbasdfa fds afdsf asdbsb adff gsdf asdv asd\nasdbasdfa fds afdsf asdbsb adff gsdf asdv asd\nasdbasdfa fds afdsf asdbsb adff gsdf asdv asdasdbasdfa fds afdsf asdbsb adff gsdf asdv asdasdbasdfa fds afdsf asdbsb adff gsdf asdv asdasdbasdfa fds afdsf asdbsb adff gsdf asdv asdasdbasdfa fds afdsf asdbsb adff gsdf asdv asdasdbasdfa fds afdsf asdbsb adff gsdf asdv asdasdbasdfa fds afdsf asdbsb adff gsdf asdv asdasdbasdfa fds afdsf asdbsb adff gsdf asdv asdasdbasdfa fds afdsf asdbsb adff gsdf asdv asdasdbasdfa fds afdsf asdbsb adff gsdf asdv asdasdbasdfa fds afdsf asdbsb adff gsdf asdv asd",
       "order": 1
     },
     {
-      "id": "1",
-      "title": "Design login page",
+      "id": "e49e",
+      "title": "task 2",
       "priority": "high",
       "status": "todo",
-      "description": "Create the UI layout for the login screen",
-      "order": 0
-    },
-    {
-      "id": "2",
-      "title": "API integration",
-      "priority": "high",
-      "status": "in-progress",
-      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio delectus ipsa pariatur tempora dolorum voluptatum magnam, odit similique quo esse officiis sed explicabo quidem velit, natus autem ea, cupiditate id!",
-      "order": 0
+      "description": "",
+      "order": 1
     }
   ],
-  "trash": [
-    {
-      "id": "ad9c",
-      "title": "test",
-      "priority": "medium",
-      "status": "done",
-      "description": "asdbasrf3e",
-      "order": 5
-    },
-    {
-      "id": "4",
-      "title": "Write unit tests",
-      "description": "Add tests for the task manager module",
-      "priority": "medium",
-      "status": "done",
-      "order": 1
-    }
-  ]
+  "trash": []
 }

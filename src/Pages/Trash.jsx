@@ -1,26 +1,26 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "../Style/Trash.css";
 import axios from "axios";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
-import ConfirmationModal from "../Components/ConfirmPopup"; 
+import ConfirmPopup from "../Components/ConfirmPopup";
 
-// 1. Accept the prop here
 export default function Trash({ onTrashUpdate }) {
   const [search, setSearch] = useState("");
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // --- Modal State ---
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [confirmAction, setConfirmAction] = useState({ type: null, taskId: null });
 
-  const API_URL = "http://localhost:5000"; 
+  const API_URL = "http://localhost:5000";
 
   useEffect(() => {
     axios
       .get(`${API_URL}/trash`)
       .then((res) => {
-        const sorted = res.data.sort((a, b) => a.order - b.order);
+        // Sort data safely
+        const sorted = res.data.sort((a, b) => (a.order || 0) - (b.order || 0));
         setData(sorted);
       })
       .catch((err) => console.log(err))
@@ -47,8 +47,7 @@ export default function Trash({ onTrashUpdate }) {
       await axios.delete(`${API_URL}/trash/${id}`);
 
       setData(data.filter((t) => t.id !== id));
-      
-      // 2. TELL APP.JSX TO UPDATE THE COUNTER
+
       if (onTrashUpdate) onTrashUpdate();
 
     } catch (error) {
@@ -61,8 +60,7 @@ export default function Trash({ onTrashUpdate }) {
     try {
       await axios.delete(`${API_URL}/trash/${id}`);
       setData(data.filter((t) => t.id !== id));
-      
-      // 3. TELL APP.JSX TO UPDATE THE COUNTER
+
       if (onTrashUpdate) onTrashUpdate();
 
     } catch (error) {
@@ -78,7 +76,10 @@ export default function Trash({ onTrashUpdate }) {
     }
   };
 
+  // --- FIX 1: Filter out tasks that have no ID ---
   const filtered = data.filter((task) =>
+    task &&
+    task.id != null &&
     task.title.toLowerCase().includes(search.toLowerCase())
   );
 
@@ -91,16 +92,26 @@ export default function Trash({ onTrashUpdate }) {
 
     setData(items);
 
+    // Save order
     for (let i = 0; i < items.length; i++) {
-      await axios.patch(`${API_URL}/trash/${items[i].id}`, {
-        order: i,
-      });
+      if (items[i] && items[i].id) {
+        await axios.patch(`${API_URL}/trash/${items[i].id}`, {
+          order: i,
+        });
+      }
     }
   };
 
   return (
     <div className="TrashPage">
       <div className="TrashContent">
+
+        <div className="trash-header">
+          <Link to="/home" className="return-btn">
+            <i className="fa-solid fa-arrow-left"></i> Return
+          </Link>
+        </div>
+
         {loading ? (
           <div className="ImageLoader">
             <img src="/loading1.gif" alt="Loading..." className="LoaderGif" />
@@ -130,7 +141,8 @@ export default function Trash({ onTrashUpdate }) {
                         filtered.map((task, index) => (
                           <Draggable
                             key={task.id}
-                            draggableId={task.id.toString()}
+                            // --- FIX 2: Use String() wrapper instead of .toString() ---
+                            draggableId={String(task.id)}
                             index={index}
                           >
                             {(provided) => (
@@ -174,7 +186,7 @@ export default function Trash({ onTrashUpdate }) {
         )}
       </div>
 
-      <ConfirmationModal
+      <ConfirmPopup
         isOpen={isConfirmOpen}
         onClose={() => setIsConfirmOpen(false)}
         onConfirm={handleConfirm}
