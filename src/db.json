@@ -11,18 +11,60 @@
     {
       "id": "2",
       "title": "API integration",
-      "priority": "medium",
-      "status": "done",
-      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio delectus ipsa pariatur tempora dolorum voluptatum magnam, odit similique quo esse officiis sed explicabo quidem velit, natus autem ea, cupiditate id! Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio delectus ipsa pariatur tempora dolorum voluptatum magnam, odit similique quo esse officiis sed explicabo quidem velit, natus autem ea, cupiditate id! Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio delectus ipsa pariatur tempora dolorum voluptatum magnam, odit similique quo esse officiis sed explicabo quidem velit, natus autem ea, cupiditate id!Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio delectus ipsa pariatur tempora dolorum voluptatum magnam, odit similique quo esse officiis sed explicabo quidem velit, natus autem ea, cupiditate id!",
+      "priority": "high",
+      "status": "in-progress",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio delectus ipsa pariatur tempora dolorum voluptatum magnam, odit similique quo esse officiis sed explicabo quidem velit, natus autem ea, cupiditate id!",
+      "order": 0
+    },
+    {
+      "id": "3",
+      "title": "Fix navbar bug",
+      "description": "Navbar not closing on mobile session",
+      "priority": "low",
+      "status": "todo",
       "order": 1
+    },
+  
+    {
+      "id": "1765443333014",
+      "title": "title",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio delectus ipsa pariatur tempora dolorum voluptatum magnam, odit similique quo esse officiis sed explicabo quidem velit, natus autem ea, cupiditate id!"
+    },
+    {
+      "id": "1765443346030",
+      "title": "vadsba",
+      "description": "asdasdbasdfad"
+    },
+    {
+      "id": "1765443551906",
+      "title": "rwehwertwer",
+      "description": "twerhwertrw"
     },
     {
       "id": "4",
       "title": "Write unit tests",
-      "priority": "low",
-      "status": "in-progress",
       "description": "Add tests for the task manager module",
+      "priority": "medium",
+      "status": "done",
       "order": 1
+    },
+    {
+      "id": "1",
+      "title": "Design login page",
+      "priority": "high",
+      "status": "todo",
+      "description": "Create the UI layout for the login screen",
+      "order": 0
+    }
+  ],
+  "trash": [
+    {
+      "id": "101",
+      "title": "Old documentation cleanup",
+      "description": "Remove outdated doc files from the project",
+      "priority": "low",
+      "status": "todo",
+      "order": 0
     },
     {
       "id": "103",
@@ -33,27 +75,25 @@
       "order": 1
     },
     {
+      "id": "104",
+      "title": "maryam",
+      "order": 1
+    },
+    {
+      "id": "102",
+      "title": "Deleted",
+      "priority": "low",
+      "status": "in-progress",
+      "description": "Remove outdated doc files from the project",
+      "order": 3
+    },
+    {
       "id": "f0f0",
       "title": "Cigma design",
       "priority": "high",
       "status": "done",
       "description": "description about the Cigma design",
-      "order": 2
-    },
-    {
-      "id": "101",
-      "title": "Old documentation cleanup",
-      "priority": "low",
-      "status": "todo",
-      "description": "Remove outdated doc files from the projectRemove outdated doc files from the projectRemove outdated doc files from the projectRemove outdated doc files from the projectRemove outdated doc files from the projectRemove outdated doc files from the project",
-      "order": 0
-    }
-  ],
-  "trash": [
-    {
-      "id": "104",
-      "title": "maryam",
-      "order": 2
+      "order": 4
     },
     {
       "id": "ad9c",
@@ -61,15 +101,7 @@
       "priority": "medium",
       "status": "done",
       "description": "asdbasrf3e",
-      "order": 1
-    },
-    {
-      "id": "7667",
-      "title": "asdb",
-      "priority": "medium",
-      "status": "todo",
-      "description": "sadbasasdfbav asdf asd asdga sdg acvb srt",
-      "order": 0
+      "order": 5
     }
   ]
 }

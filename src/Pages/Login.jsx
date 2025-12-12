@@ -1,32 +1,43 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import '../Style/Login.css';
+import '../Style/Footer.css';
 
+export default function Login({ setUsername }) {  
 
-export default function Login() {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [error, setError] = useState(""); 
+
+  const [formData, setFormData] = useState({
+    username:"",
+    email:"",
+    password:""
+  });
+
+  const handleChange=(e) =>{
+    const {name,value } = e.target
+    setFormData((prev) =>({
+        ...prev,
+        [name] : value
+    }))
+  }
 
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if(username === "" || email === "" || password === ""){
+    if(formData.username === "" || formData.email === "" || formData.password === ""){
       setError("All fields are required");
-    } else if(username !== "admin" || email !== "admin@example.com" || password !== "123SALWA"){
-      setError("Incorrect username, email, or password");
     } else {
       setError("");
+      setUsername(formData.username);        
+      localStorage.setItem("username", formData.username); 
       navigate("/home");   
     }
   };
 
   return (
     <div className='login-container'>
-      
       <div className='image-container'>
         <img src="/login.png" alt="WorkflowHub Logo" />
       </div>
@@ -35,22 +46,24 @@ export default function Login() {
         <form className='login-form' onSubmit={handleSubmit}>
           
           <label>Username:</label>
-          <input type="text" value={username} onChange={e => setUsername(e.target.value)} placeholder="Enter username" />
+          <input type="text" value={formData.username} name='username' onChange={handleChange} placeholder="Enter username" />
 
           <label>Email:</label>
-          <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Enter email" />
+          <input type="email"value={formData.email} name='email' onChange={handleChange} placeholder="Enter email" />
 
           <label>Password:</label>
-          <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Enter password" />
+          <input type="password" value={formData.password} name='password' onChange={handleChange} placeholder="Enter password" />
 
           {error && <p className="error-message">{error}</p>}
 
           <button type="submit">Login</button>
+      
         </form>
       </div>
     </div>
   );
 }
+
 
 
 
