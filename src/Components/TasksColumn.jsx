@@ -23,15 +23,6 @@ const TasksColumn = ({ title, status, tasks, onEdit, onDelete, showAddButton, on
             onDelete={() => onDelete(task.id)}
           />
         ))}
-        
-        {showAddButton && (
-          <div className="add-task-btn" onClick={onAdd}>
-            <span>Add Task</span>
-            <div className="plus-box">
-                <p>+</p>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

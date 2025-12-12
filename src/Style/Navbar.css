@@ -1,24 +1,23 @@
 .navbar {
   width: 100%;
   height: 100px;
-  background: #d8e8ff;
+  background: #d8e8ff; /* Your specific background color */
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0 40px;
   box-sizing: border-box;
+  font-family: sans-serif;
+  color: #08306b;
+  font-size: larger;
 }
 
 /* LEFT SIDE */
-.left-section {
+.navbar-left {
   display: flex;
   align-items: center;
-  gap: 25px; /* spacing between logo and welcome text */
-}
-
-.logo-wrapper {
-  display: flex;
-  align-items: center;
+  gap: 25px;
+  text-decoration: none; /* Removes underline from Link */
 }
 
 .navbar-logo {
@@ -27,27 +26,59 @@
   object-fit: contain;
 }
 
-/* WELCOME TEXT */
-.welcome-text {
+/* WELCOME TEXT - Centered or placed next to logo */
+.welcome {
   font-size: 26px;
   color: #08306b;
   font-weight: 700;
   margin: 0;
+  /* Optional: if you want it perfectly centered in the navbar */
+  /* position: absolute; left: 50%; transform: translateX(-50%); */
 }
 
 /* RIGHT SIDE */
-.right-section {
+.navbar-right {
   display: flex;
   align-items: center;
 }
 
+/* WRAPPER: Essential for the badge to sit on top of the icon */
+.trash-wrapper {
+  position: relative; /* Badge positions relative to this */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  width: 40px; /* Gives a hit area for the click */
+  height: 40px;
+}
+
 .trash-icon {
-  font-size: 28px;
+  font-size: 28px; /* Your requested size */
   color: #08306b;
   cursor: pointer;
   transition: 0.2s ease-in-out;
 }
 
-.trash-icon:hover {
-  color: #1c4daa;
+.trash-wrapper:hover .trash-icon {
+  color: #1c4daa; /* Your hover color */
+}
+
+/* THE RED COUNT BADGE */
+.trash-count-badge {
+  position: absolute;
+  top: -5px; /* Adjusts vertical position */
+  right: -5px; /* Adjusts horizontal position */
+  background-color: #d32f2f; /* Red alert color */
+  color: white;
+  border-radius: 50%; /* Makes it a perfect circle */
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #d8e8ff; /* Matches navbar bg to create a 'cutout' look */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "../Style/Trash.css";
 import axios from "axios";
-import Navbar from "../Components/Navbar";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import ConfirmationModal from "../Components/ConfirmPopup"; 
 
-export default function Trash() {
+// 1. Accept the prop here
+export default function Trash({ onTrashUpdate }) {
   const [search, setSearch] = useState("");
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -27,7 +27,6 @@ export default function Trash() {
       .finally(() => setLoading(false));
   }, []);
 
-  // --- 1. Initiate Actions (Open Modal) ---
   const initiateRestore = (id) => {
     setConfirmAction({ type: 'restore', taskId: id });
     setIsConfirmOpen(true);
@@ -38,19 +37,20 @@ export default function Trash() {
     setIsConfirmOpen(true);
   };
 
-  // --- 2. Execute Actions (API Calls) ---
   const executeRestore = async () => {
     const id = confirmAction.taskId;
     try {
       const task = data.find((t) => t.id === id);
       if (!task) return;
 
-      // Add back to tasks
       await axios.post(`${API_URL}/tasks`, task);
-      // Remove from trash
       await axios.delete(`${API_URL}/trash/${id}`);
 
       setData(data.filter((t) => t.id !== id));
+      
+      // 2. TELL APP.JSX TO UPDATE THE COUNTER
+      if (onTrashUpdate) onTrashUpdate();
+
     } catch (error) {
       console.log("Erreur restore :", error);
     }
@@ -61,22 +61,23 @@ export default function Trash() {
     try {
       await axios.delete(`${API_URL}/trash/${id}`);
       setData(data.filter((t) => t.id !== id));
+      
+      // 3. TELL APP.JSX TO UPDATE THE COUNTER
+      if (onTrashUpdate) onTrashUpdate();
+
     } catch (error) {
       console.log("Erreur delete :", error);
     }
   };
 
-  // --- 3. Confirm Handler (Passed to Modal) ---
   const handleConfirm = () => {
     if (confirmAction.type === 'restore') {
       executeRestore();
     } else if (confirmAction.type === 'delete') {
       executePermanentDelete();
     }
-    // Modal closes automatically via onClose in the component
   };
 
-  // Filter Tasks
   const filtered = data.filter((task) =>
     task.title.toLowerCase().includes(search.toLowerCase())
   );
@@ -90,7 +91,6 @@ export default function Trash() {
 
     setData(items);
 
-    // Save new order to JSON-server
     for (let i = 0; i < items.length; i++) {
       await axios.patch(`${API_URL}/trash/${items[i].id}`, {
         order: i,
@@ -100,7 +100,6 @@ export default function Trash() {
 
   return (
     <div className="TrashPage">
-
       <div className="TrashContent">
         {loading ? (
           <div className="ImageLoader">
@@ -147,14 +146,12 @@ export default function Trash() {
                                 </div>
 
                                 <div className="TaskActions">
-                                  {/* Restore Icon - Triggers Modal */}
                                   <img
                                     src="/restore.png"
                                     alt="Restore"
                                     className="ActionIcon"
                                     onClick={() => initiateRestore(task.id)}
                                   />
-                                  {/* Delete Icon - Triggers Modal */}
                                   <img
                                     src="/delete.png"
                                     alt="Delete permanently"
@@ -177,7 +174,6 @@ export default function Trash() {
         )}
       </div>
 
-      {/* The Confirmation Modal */}
       <ConfirmationModal
         isOpen={isConfirmOpen}
         onClose={() => setIsConfirmOpen(false)}
