@@ -6,19 +6,18 @@ import { Droppable, Draggable } from "@hello-pangea/dnd";
 const TasksColumn = ({ title, status, tasks, onEdit, onDelete, showAddButton, onAdd }) => {
   const filtered = tasks
     .filter((task) => task.status === status)
-    .sort((a,b) => a.order - b.order);
+    .sort((a, b) => a.order - b.order);
 
   return (
     <div className="column">
       <div className="column-header">{title}</div>
-
+      {/* Add Button at the bottom of the list if enabled */}
       {showAddButton && (
         <div className="add-task-btn" onClick={onAdd}>
           <span>Add Task</span>
-          <img src="/icons8-add-50.png" className="addIcon" />
+          <div className="plus-box">+</div>
         </div>
       )}
-
       <Droppable droppableId={status}>
         {(provided) => (
           <div
@@ -33,6 +32,7 @@ const TasksColumn = ({ title, status, tasks, onEdit, onDelete, showAddButton, on
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
+                    style={{ ...provided.draggableProps.style, marginBottom: "10px" }}
                   >
                     <TaskTicket
                       task={task}
@@ -43,10 +43,8 @@ const TasksColumn = ({ title, status, tasks, onEdit, onDelete, showAddButton, on
                 )}
               </Draggable>
             ))}
-
             {provided.placeholder}
 
-           
           </div>
         )}
       </Droppable>

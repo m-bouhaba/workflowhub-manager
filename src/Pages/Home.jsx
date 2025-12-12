@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from "react";
-import TasksColumn from "../Components/TasksColumn"; 
-import TaskModal from "../Components/AddEditPopup"; 
-import "../Style/Home.css"; 
-import Navbar from "../Components/Navbar";
+import TasksColumn from "../Components/TasksColumn";
+import TaskModal from "../Components/AddEditPopup"; // Ensure this path matches your file structure
+import "../Style/Home.css";
 import { DragDropContext } from "@hello-pangea/dnd";
 
-const HomePage = () => {
-
+const HomePage = ({ onTrashUpdate }) => {
   const [tasks, setTasks] = useState([]);
-  const [trashCount, setTrashCount] = useState(0); 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentTask, setCurrentTask] = useState(null); 
+  const [currentTask, setCurrentTask] = useState(null);
 
   const API_URL = "http://localhost:5000";
 
@@ -20,12 +17,8 @@ const HomePage = () => {
       try {
         const tasksRes = await fetch(`${API_URL}/tasks`);
         const tasksData = await tasksRes.json();
-
-        // setTasks(tasksData);
-
-        // const trashRes = await fetch(`${API_URL}/trash`);
-        // const trashData = await trashRes.json();
-        // setTrashCount(trashData.length);
+        // Sort initially
+        setTasks(tasksData.sort((a, b) => a.order - b.order));
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -35,12 +28,12 @@ const HomePage = () => {
 
   // --- Handlers ---
   const handleAddNew = () => {
-    setCurrentTask(null); 
+    setCurrentTask(null);
     setIsModalOpen(true);
   };
 
   const handleEdit = (task) => {
-    setCurrentTask(task); 
+    setCurrentTask(task);
     setIsModalOpen(true);
   };
 
@@ -50,18 +43,22 @@ const HomePage = () => {
     if (!taskToTrash) return;
 
     try {
+      // 1. Add to Trash
       await fetch(`${API_URL}/trash`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(taskToTrash),
       });
 
+      // 2. Delete from Tasks
       await fetch(`${API_URL}/tasks/${id}`, { method: "DELETE" });
 
+      // 3. Reorder remaining tasks in that column
       const tasksToUpdate = tasks.filter(
         (t) => t.status === taskToTrash.status && t.order > taskToTrash.order
       );
 
+      // Update backend order
       await Promise.all(
         tasksToUpdate.map((t) =>
           fetch(`${API_URL}/tasks/${t.id}`, {
@@ -72,6 +69,7 @@ const HomePage = () => {
         )
       );
 
+      // 4. Update Local State
       setTasks((prev) =>
         prev
           .filter((t) => t.id !== id)
@@ -83,39 +81,48 @@ const HomePage = () => {
           })
       );
 
-      setTrashCount((prev) => prev + 1);
+      // 5. Notify App.jsx to update the Trash Counter in Navbar
+      if (onTrashUpdate) onTrashUpdate();
+
     } catch (error) {
       console.error("Error moving to trash:", error);
     }
   };
 
   // --- ADD & EDIT LOGIC ---
+  // --- ADD & EDIT LOGIC ---
   const handleSave = async (taskData) => {
     try {
       if (taskData.id) {
+        // --- EDIT MODE (Keep ID) ---
         const response = await fetch(`${API_URL}/tasks/${taskData.id}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(taskData),
         });
-
         const updatedTask = await response.json();
 
         setTasks((prev) =>
           prev.map((t) => (t.id === updatedTask.id ? updatedTask : t))
         );
       } else {
+        // --- ADD MODE (Remove ID so server generates it) ---
+
+        // 1. Calculate Order
         const tasksInSameColumn = tasks.filter(
           (t) => t.status === taskData.status
         );
-
         const maxOrder =
           tasksInSameColumn.length > 0
             ? Math.max(...tasksInSameColumn.map((t) => t.order || 0))
             : 0;
 
+        // 2. CRITICAL FIX: Extract 'id' out so we don't send 'id: null'
+        const { id, ...dataWithoutId } = taskData;
+
+        // 3. Create payload without ID
         const newTaskPayload = {
-          ...taskData,
+          ...dataWithoutId,
           order: maxOrder + 1,
         };
 
@@ -126,7 +133,6 @@ const HomePage = () => {
         });
 
         const savedTask = await response.json();
-
         setTasks((prev) => [...prev, savedTask]);
       }
 
@@ -137,81 +143,89 @@ const HomePage = () => {
   };
 
   // --- DRAG & DROP LOGIC ---
-const handleDragEnd = async (result) => {
-  const { source, destination } = result;
-  if (!destination) return;
+  const handleDragEnd = async (result) => {
+    const { source, destination } = result;
+    if (!destination) return;
 
-  const sourceTasks = tasks
-    .filter((t) => t.status === source.droppableId)
-    .sort((a, b) => a.order - b.order);
-  const destTasks = tasks
-    .filter((t) => t.status === destination.droppableId)
-    .sort((a, b) => a.order - b.order);
+    // Create a copy of tasks to manipulate
+    let newTasks = Array.from(tasks);
 
-  // Déplacer dans la même colonne
-  if (source.droppableId === destination.droppableId) {
-    const [movedTask] = sourceTasks.splice(source.index, 1);
-    sourceTasks.splice(destination.index, 0, movedTask);
+    // Filter out tasks by column to calculate indices accurately
+    const sourceColumnTasks = newTasks
+      .filter(t => t.status === source.droppableId)
+      .sort((a, b) => a.order - b.order);
 
-    // Mettre à jour les order
-    const updatedTasks = tasks.map((t) => {
-      if (t.status === source.droppableId) {
-        const index = sourceTasks.findIndex((st) => st.id === t.id);
-        if (index !== -1) {
-          const newOrder = index + 1;
-          if (t.order !== newOrder) {
-            // Update sur serveur
-            fetch(`${API_URL}/tasks/${t.id}`, {
-              method: "PATCH",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({ order: newOrder }),
-            });
-          }
-          return { ...t, order: newOrder };
-        }
+    const destColumnTasks = (source.droppableId === destination.droppableId)
+      ? sourceColumnTasks
+      : newTasks
+        .filter(t => t.status === destination.droppableId)
+        .sort((a, b) => a.order - b.order);
+
+    // Identify the moved task
+    const movedTask = sourceColumnTasks[source.index];
+
+    // Remove from source array locally
+    // (We use IDs to find and manipulate the big list)
+
+    // Simple approach: Update properties locally then sync
+    if (source.droppableId === destination.droppableId) {
+      // Reordering in same column
+      sourceColumnTasks.splice(source.index, 1);
+      sourceColumnTasks.splice(destination.index, 0, movedTask);
+
+      // Update orders based on new array index
+      const updates = sourceColumnTasks.map((t, index) => ({
+        ...t,
+        order: index + 1
+      }));
+
+      // Merge updates back into main state
+      newTasks = newTasks.map(t => {
+        const updated = updates.find(u => u.id === t.id);
+        return updated || t;
+      });
+
+    } else {
+      // Moving between columns
+      const sourceTasksList = newTasks.filter(t => t.status === source.droppableId).sort((a, b) => a.order - b.order);
+      const destTasksList = newTasks.filter(t => t.status === destination.droppableId).sort((a, b) => a.order - b.order);
+
+      // Remove from source
+      sourceTasksList.splice(source.index, 1);
+      // Add to dest
+      movedTask.status = destination.droppableId;
+      destTasksList.splice(destination.index, 0, movedTask);
+
+      // Recalculate orders for BOTH columns
+      const sourceUpdates = sourceTasksList.map((t, index) => ({ ...t, order: index + 1 }));
+      const destUpdates = destTasksList.map((t, index) => ({ ...t, order: index + 1 }));
+
+      // Merge back
+      newTasks = newTasks.map(t => {
+        const sUp = sourceUpdates.find(u => u.id === t.id);
+        if (sUp) return sUp;
+        const dUp = destUpdates.find(u => u.id === t.id);
+        if (dUp) return dUp;
+        return t;
+      });
+    }
+
+    setTasks(newTasks);
+
+    // Persist changes to server (Naive approach: update changed tasks)
+    // For simplicity in this project, we can loop through the changed columns
+    newTasks.forEach(t => {
+      // Optimization: Only patch if necessary could be done here, 
+      // but for safety we patch the tasks in the affected columns.
+      if (t.status === source.droppableId || t.status === destination.droppableId) {
+        fetch(`${API_URL}/tasks/${t.id}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ order: t.order, status: t.status }),
+        });
       }
-      return t;
     });
-
-    setTasks(updatedTasks);
-    return;
-  }
-
-  // Déplacer entre colonnes
-  const [movedTask] = sourceTasks.splice(source.index, 1);
-  movedTask.status = destination.droppableId;
-  destTasks.splice(destination.index, 0, movedTask);
-
-  const updatedTasks = tasks.map((t) => {
-    // Update order et status si nécessaire
-    if (t.id === movedTask.id) return movedTask;
-
-    if (t.status === source.droppableId) {
-      const index = sourceTasks.findIndex((st) => st.id === t.id);
-      if (index !== -1) return { ...t, order: index + 1 };
-    }
-
-    if (t.status === destination.droppableId) {
-      const index = destTasks.findIndex((dt) => dt.id === t.id);
-      if (index !== -1) return { ...t, order: index + 1 };
-    }
-
-    return t;
-  });
-
-  // Persist les order et status sur serveur
-  updatedTasks.forEach((t) => {
-    fetch(`${API_URL}/tasks/${t.id}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ order: t.order, status: t.status }),
-    });
-  });
-
-  setTasks(updatedTasks);
-};
-
-
+  };
 
   return (
     <div className="home-page">

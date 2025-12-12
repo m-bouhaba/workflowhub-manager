@@ -2,7 +2,6 @@ import React from "react";
 import "../Style/TaskTicket.css";
 
 const TaskTicket = ({ task, onEdit, onDelete }) => {
-
   const getBadgeClass = () => {
     const priority = task.priority ? task.priority.toLowerCase() : "low";
     if (priority === "high") return "badge-high";
