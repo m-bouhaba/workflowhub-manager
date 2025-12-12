@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom"; // Import Link for Return button
 import "../Style/Trash.css";
 import axios from "axios";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
-import ConfirmationModal from "../Components/ConfirmPopup"; 
+// Fixed import name to match file path logic
+import ConfirmPopup from "../Components/ConfirmPopup"; 
 
-// 1. Accept the prop here
 export default function Trash({ onTrashUpdate }) {
   const [search, setSearch] = useState("");
   const [data, setData] = useState([]);
@@ -48,7 +49,6 @@ export default function Trash({ onTrashUpdate }) {
 
       setData(data.filter((t) => t.id !== id));
       
-      // 2. TELL APP.JSX TO UPDATE THE COUNTER
       if (onTrashUpdate) onTrashUpdate();
 
     } catch (error) {
@@ -62,7 +62,6 @@ export default function Trash({ onTrashUpdate }) {
       await axios.delete(`${API_URL}/trash/${id}`);
       setData(data.filter((t) => t.id !== id));
       
-      // 3. TELL APP.JSX TO UPDATE THE COUNTER
       if (onTrashUpdate) onTrashUpdate();
 
     } catch (error) {
@@ -101,6 +100,14 @@ export default function Trash({ onTrashUpdate }) {
   return (
     <div className="TrashPage">
       <div className="TrashContent">
+        
+        {/* --- RETURN BUTTON --- */}
+        <div className="trash-header">
+          <Link to="/home" className="return-btn">
+            <i className="fa-solid fa-arrow-left"></i> Return
+          </Link>
+        </div>
+
         {loading ? (
           <div className="ImageLoader">
             <img src="/loading1.gif" alt="Loading..." className="LoaderGif" />
@@ -174,7 +181,7 @@ export default function Trash({ onTrashUpdate }) {
         )}
       </div>
 
-      <ConfirmationModal
+      <ConfirmPopup
         isOpen={isConfirmOpen}
         onClose={() => setIsConfirmOpen(false)}
         onConfirm={handleConfirm}

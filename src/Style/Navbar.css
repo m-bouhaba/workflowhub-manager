@@ -1,7 +1,7 @@
 .navbar {
   width: 100%;
   height: 100px;
-  background: #d8e8ff; /* Your specific background color */
+  background: #d8e8ff;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -17,7 +17,7 @@
   display: flex;
   align-items: center;
   gap: 25px;
-  text-decoration: none; /* Removes underline from Link */
+  text-decoration: none;
 }
 
 .navbar-logo {
@@ -26,52 +26,51 @@
   object-fit: contain;
 }
 
-/* WELCOME TEXT - Centered or placed next to logo */
+/* WELCOME TEXT */
 .welcome {
   font-size: 26px;
   color: #08306b;
   font-weight: 700;
   margin: 0;
-  /* Optional: if you want it perfectly centered in the navbar */
-  /* position: absolute; left: 50%; transform: translateX(-50%); */
 }
 
 /* RIGHT SIDE */
 .navbar-right {
   display: flex;
   align-items: center;
+  gap: 20px; /* Space between Trash and Logout */
 }
 
-/* WRAPPER: Essential for the badge to sit on top of the icon */
+/* TRASH WRAPPER */
 .trash-wrapper {
-  position: relative; /* Badge positions relative to this */
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  width: 40px; /* Gives a hit area for the click */
+  width: 40px;
   height: 40px;
 }
 
 .trash-icon {
-  font-size: 28px; /* Your requested size */
+  font-size: 28px;
   color: #08306b;
   cursor: pointer;
   transition: 0.2s ease-in-out;
 }
 
 .trash-wrapper:hover .trash-icon {
-  color: #1c4daa; /* Your hover color */
+  color: #1c4daa;
 }
 
-/* THE RED COUNT BADGE */
+/* TRASH COUNT BADGE */
 .trash-count-badge {
   position: absolute;
-  top: -5px; /* Adjusts vertical position */
-  right: -5px; /* Adjusts horizontal position */
-  background-color: #d32f2f; /* Red alert color */
+  top: -5px;
+  right: -5px;
+  background-color: #d32f2f;
   color: white;
-  border-radius: 50%; /* Makes it a perfect circle */
+  border-radius: 50%;
   width: 20px;
   height: 20px;
   font-size: 12px;
@@ -79,6 +78,39 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px solid #d8e8ff; /* Matches navbar bg to create a 'cutout' look */
+  border: 2px solid #d8e8ff;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* SEPARATOR LINE */
+.nav-separator {
+  width: 2px;
+  height: 30px;
+  background-color: #a0c4e3;
+  opacity: 0.5;
+}
+
+/* LOGOUT BUTTON */
+.logout-wrapper {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+  width: 40px;
+  height: 40px;
+}
+
+.logout-icon {
+  font-size: 28px;
+  color: #08306b;
+  transition: color 0.2s;
+}
+
+.logout-wrapper:hover .logout-icon {
+  color: #d32f2f; /* Red on hover */
+}
+
+.logout-wrapper:hover {
+  transform: translateX(2px);
 }
