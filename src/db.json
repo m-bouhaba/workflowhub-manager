@@ -76,7 +76,7 @@
       "priority": "medium",
       "status": "done",
       "description": "asdbasrf3e",
-      "order": 5
+      "order": 1
     },
     {
       "id": "2",
@@ -92,7 +92,7 @@
       "description": "Add tests for the task manager module",
       "priority": "medium",
       "status": "done",
-      "order": 1
+      "order": 2
     }
   ]
 }
