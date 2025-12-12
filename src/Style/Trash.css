@@ -54,9 +54,6 @@
   font-family: sans-serif;
 }
 
-.ContentCard{
-
-}
 
 .TaskActions {
   display: flex;
@@ -74,4 +71,35 @@
 
 .ActionIcon:hover {
   transform: scale(1.15);
+}
+/* Trash Header & Return Button */
+.trash-header {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+.return-btn {
+  background-color: white;
+  color: #555;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: all 0.2s;
+  font-family: sans-serif;
+  border: 1px solid transparent;
+}
+
+.return-btn:hover {
+  background-color: #f0f8ff;
+  color: #08306b;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
 }

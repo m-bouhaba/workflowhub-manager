@@ -8,7 +8,7 @@ import { DragDropContext } from "@hello-pangea/dnd";
 const HomePage = () => {
 
   const [tasks, setTasks] = useState([]);
-  const [trashCount, setTrashCount] = useState(0); 
+  // Removed local trashCount state!
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentTask, setCurrentTask] = useState(null); 
 
@@ -91,6 +91,8 @@ const HomePage = () => {
 
   // --- ADD & EDIT LOGIC ---
   const handleSave = async (taskData) => {
+    // ... (Your existing handleSave code remains exactly the same) ...
+    // Just pasting the core logic for brevity
     try {
       if (taskData.id) {
         const response = await fetch(`${API_URL}/tasks/${taskData.id}`, {
