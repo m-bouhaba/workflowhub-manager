@@ -137,7 +137,7 @@ export default function Trash({ onTrashUpdate }) {
                         filtered.map((task, index) => (
                           <Draggable
                             key={task.id}
-                            draggableId={task.id.toString()}
+                            draggableId={String(task.id)}
                             index={index}
                           >
                             {(provided) => (

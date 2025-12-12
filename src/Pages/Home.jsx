@@ -8,7 +8,7 @@ import { DragDropContext } from "@hello-pangea/dnd";
 const HomePage = () => {
 
   const [tasks, setTasks] = useState([]);
-  // Removed local trashCount state!
+  const [trashCount, setTrashCount] = useState(0); 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentTask, setCurrentTask] = useState(null); 
 
@@ -21,11 +21,11 @@ const HomePage = () => {
         const tasksRes = await fetch(`${API_URL}/tasks`);
         const tasksData = await tasksRes.json();
 
-        setTasks(tasksData);
+        // setTasks(tasksData);
 
-        const trashRes = await fetch(`${API_URL}/trash`);
-        const trashData = await trashRes.json();
-        setTrashCount(trashData.length);
+        // const trashRes = await fetch(`${API_URL}/trash`);
+        // const trashData = await trashRes.json();
+        // setTrashCount(trashData.length);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -91,8 +91,6 @@ const HomePage = () => {
 
   // --- ADD & EDIT LOGIC ---
   const handleSave = async (taskData) => {
-    // ... (Your existing handleSave code remains exactly the same) ...
-    // Just pasting the core logic for brevity
     try {
       if (taskData.id) {
         const response = await fetch(`${API_URL}/tasks/${taskData.id}`, {
