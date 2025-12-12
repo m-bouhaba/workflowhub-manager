@@ -1,96 +1,21 @@
 {
   "tasks": [
     {
-      "id": "1",
-      "title": "Design login page",
+      "id": "cb34",
+      "title": "task 1",
       "priority": "medium",
-      "status": "todo",
-      "description": "Create the UI layout for the login screen",
-      "order": 2
-    },
-    {
-      "id": "2",
-      "title": "API integration",
-      "priority": "high",
-      "status": "done",
-      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio delectus ipsa pariatur tempora dolorum voluptatum magnam, odit similique quo esse officiis sed explicabo quidem velit, natus autem ea, cupiditate id!",
-      "order": 1
-    },
-    {
-      "id": "3",
-      "title": "Fix navbar bug",
-      "description": "Navbar not closing on mobile session",
-      "priority": "low",
-      "status": "done",
-      "order": 1
-    },
-    {
-      "id": "4",
-      "title": "Write unit tests",
-      "description": "Add tests for the task manager module",
-      "priority": "medium",
-      "status": "todo",
-      "order": 3
-    },
-    {
-      "id": "10",
-      "title": "Design login page",
-      "priority": "high",
       "status": "in-progress",
-      "description": "Create the UI layout for the login screen ",
-      "order": 4
+      "description": "asdbasdfa fds afdsf asdbsb adff gsdf asdv asd\nasdbasdfa fds afdsf asdbsb adff gsdf asdv asd\nasdbasdfa fds afdsf asdbsb adff gsdf asdv asd\nasdbasdfa fds afdsf asdbsb adff gsdf asdv asd\nasdbasdfa fds afdsf asdbsb adff gsdf asdv asdasdbasdfa fds afdsf asdbsb adff gsdf asdv asdasdbasdfa fds afdsf asdbsb adff gsdf asdv asdasdbasdfa fds afdsf asdbsb adff gsdf asdv asdasdbasdfa fds afdsf asdbsb adff gsdf asdv asdasdbasdfa fds afdsf asdbsb adff gsdf asdv asdasdbasdfa fds afdsf asdbsb adff gsdf asdv asdasdbasdfa fds afdsf asdbsb adff gsdf asdv asdasdbasdfa fds afdsf asdbsb adff gsdf asdv asdasdbasdfa fds afdsf asdbsb adff gsdf asdv asdasdbasdfa fds afdsf asdbsb adff gsdf asdv asd",
+      "order": 1
     },
     {
-      "id": "6",
-      "title": "add drag and drop",
+      "id": "e49e",
+      "title": "task 2",
       "priority": "high",
       "status": "todo",
-      "description": "Create the UI layout for the login screen ",
+      "description": "",
       "order": 1
     }
   ],
-  "trash": [
-    {
-      "id": "101",
-      "title": "Old documentation cleanup",
-      "description": "Remove outdated doc files from the project",
-      "priority": "low",
-      "status": "todo",
-      "order": 0
-    },
-    {
-      "id": "1",
-      "title": "Design login page",
-      "priority": "medium",
-      "status": "in-progress",
-      "description": "Create the UI layout for the login screen",
-      "order": 0
-    }
-  ],
-  "trash": [
-    {
-      "id": "102",
-      "title": "Deleted",
-      "priority": "low",
-      "status": "in-progress",
-      "description": "Remove outdated doc files from the project",
-      "order": 3
-    },
-    {
-      "id": "f0f0",
-      "title": "Cigma design",
-      "priority": "high",
-      "status": "in-progress",
-      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio delectus ipsa pariatur tempora dolorum voluptatum magnam, odit similique quo esse officiis sed explicabo quidem velit, natus autem ea, cupiditate id!",
-      "order": 0
-    },
-    {
-      "id": "4",
-      "title": "Write unit tests",
-      "description": "Add tests for the task manager module",
-      "priority": "medium",
-      "status": "done",
-      "order": 2
-    }
-  ]
+  "trash": []
 }
