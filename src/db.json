@@ -4,24 +4,24 @@
       "id": "1",
       "title": "Design login page",
       "priority": "medium",
-      "status": "in-progress",
+      "status": "todo",
       "description": "Create the UI layout for the login screen",
-      "order": 0
+      "order": 2
     },
     {
       "id": "2",
       "title": "API integration",
       "priority": "high",
-      "status": "in-progress",
+      "status": "done",
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio delectus ipsa pariatur tempora dolorum voluptatum magnam, odit similique quo esse officiis sed explicabo quidem velit, natus autem ea, cupiditate id!",
-      "order": 0
+      "order": 1
     },
     {
       "id": "3",
       "title": "Fix navbar bug",
       "description": "Navbar not closing on mobile session",
       "priority": "low",
-      "status": "todo",
+      "status": "done",
       "order": 1
     },
     {
@@ -29,16 +29,16 @@
       "title": "Write unit tests",
       "description": "Add tests for the task manager module",
       "priority": "medium",
-      "status": "done",
-      "order": 1
+      "status": "todo",
+      "order": 3
     },
     {
-      "id": "1",
+      "id": "10",
       "title": "Design login page",
       "priority": "high",
-      "status": "done",
+      "status": "in-progress",
       "description": "Create the UI layout for the login screen ",
-      "order": 0
+      "order": 4
     },
     {
       "id": "6",
@@ -46,7 +46,7 @@
       "priority": "high",
       "status": "todo",
       "description": "Create the UI layout for the login screen ",
-      "order": 0
+      "order": 1
     }
   ],
   "trash": [
