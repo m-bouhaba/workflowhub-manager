@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../Style/Trash.css";
 import axios from "axios";
+import Navbar from "../Components/Navbar";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import ConfirmationModal from "../Components/ConfirmPopup"; 
 
@@ -99,6 +100,7 @@ export default function Trash() {
 
   return (
     <div className="TrashPage">
+
       <div className="TrashContent">
         {loading ? (
           <div className="ImageLoader">
