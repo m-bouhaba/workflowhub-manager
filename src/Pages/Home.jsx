@@ -2,14 +2,18 @@ import React, { useState, useEffect } from "react";
 import TasksColumn from "../Components/TasksColumn"; 
 import TaskModal from "../Components/AddEditPopup"; 
 import "../Style/Home.css"; 
-
+import Navbar from "../Components/Navbar";
+import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 const HomePage = () => {
+
+    
   const [tasks, setTasks] = useState([]);
   const [trashCount, setTrashCount] = useState(0); 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [currentTask, setCurrentTask] = useState(null); 
 
   const API_URL = "http://localhost:5000";
+
 
   // --- 1. Fetch Data ---
   useEffect(() => {
@@ -142,9 +146,54 @@ const HomePage = () => {
     }
   };
 
-  return (
-    <div className="home-page">
 
+  const handleDragEnd = (result) => {
+  const { source, destination } = result;
+
+  // si pas de destination (ex: lâché hors colonne)
+  if (!destination) return;
+
+  // si même colonne mais ordre changé
+  if (source.droppableId === destination.droppableId) {
+    const columnTasks = tasks.filter(t => t.status === source.droppableId);
+    const [movedTask] = columnTasks.splice(source.index, 1);
+    columnTasks.splice(destination.index, 0, movedTask);
+
+    // mettre à jour l'ordre
+    const updatedTasks = tasks.map(t => {
+      if (t.status === source.droppableId) {
+        return columnTasks.find(ct => ct.id === t.id) || t;
+      }
+      return t;
+    });
+
+    setTasks(updatedTasks);
+    // Ici tu peux faire un axios.put pour persister l'ordre dans db.json
+    return;
+  }
+
+  // déplacement entre colonnes
+  const sourceTasks = tasks.filter(t => t.status === source.droppableId);
+  const destTasks = tasks.filter(t => t.status === destination.droppableId);
+
+  const [movedTask] = sourceTasks.splice(source.index, 1);
+  movedTask.status = destination.droppableId; // mettre à jour le status
+  destTasks.splice(destination.index, 0, movedTask);
+
+  const updatedTasks = tasks.map(t => {
+    if (t.id === movedTask.id) return movedTask;
+    return t;
+  });
+
+  setTasks(updatedTasks);
+  // Persister via axios.put sur movedTask
+};
+
+
+  return (
+     <div className="home-page">
+        {/* <Navbar username={username} /> */}
+        <DragDropContext onDragEnd={handleDragEnd}>
       <div className="board">
         {/* Pass sorted tasks to columns */}
         <TasksColumn 
@@ -171,14 +220,14 @@ const HomePage = () => {
           onDelete={handleDelete}
         />
       </div>
-
+        </DragDropContext>
       <TaskModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onSave={handleSave}
         taskToEdit={currentTask}
       />
-    </div>
+     </div>
   );
 };
 

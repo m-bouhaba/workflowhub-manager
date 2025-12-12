@@ -11,18 +11,10 @@
     {
       "id": "2",
       "title": "API integration",
-      "priority": "medium",
-      "status": "done",
-      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio delectus ipsa pariatur tempora dolorum voluptatum magnam, odit similique quo esse officiis sed explicabo quidem velit, natus autem ea, cupiditate id! Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio delectus ipsa pariatur tempora dolorum voluptatum magnam, odit similique quo esse officiis sed explicabo quidem velit, natus autem ea, cupiditate id! Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio delectus ipsa pariatur tempora dolorum voluptatum magnam, odit similique quo esse officiis sed explicabo quidem velit, natus autem ea, cupiditate id!Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio delectus ipsa pariatur tempora dolorum voluptatum magnam, odit similique quo esse officiis sed explicabo quidem velit, natus autem ea, cupiditate id!",
-      "order": 1
-    },
-    {
-      "id": "4",
-      "title": "Write unit tests",
-      "priority": "low",
+      "priority": "high",
       "status": "in-progress",
-      "description": "Add tests for the task manager module",
-      "order": 1
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio delectus ipsa pariatur tempora dolorum voluptatum magnam, odit similique quo esse officiis sed explicabo quidem velit, natus autem ea, cupiditate id!",
+      "order": 0
     },
     {
       "id": "103",
@@ -31,6 +23,19 @@
       "status": "todo",
       "description": "Remove outdated doc files from the project",
       "order": 1
+    },
+    {
+      "id": "104",
+      "title": "maryam",
+      "order": 1
+    },
+    {
+      "id": "102",
+      "title": "Deleted",
+      "priority": "low",
+      "status": "in-progress",
+      "description": "Remove outdated doc files from the project",
+      "order": 3
     },
     {
       "id": "f0f0",
