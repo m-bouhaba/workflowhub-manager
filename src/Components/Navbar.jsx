@@ -19,6 +19,7 @@ const Navbar = ({username}) => {
           <i className="fa-solid fa-trash trash-icon"></i>
         </Link>
       </div>
+
     </nav>
   );
 };
