@@ -1,6 +1,6 @@
 import React from 'react';
 import '../Style/Footer.css';
-import { FaInstagram, FaFacebook, FaGithub } from 'react-icons/fa'; // import icons
+// import { FaInstagram, FaFacebook, FaGithub } from 'react-icons/fa'; 
 
 export default function Footer() {
   return (
@@ -8,7 +8,7 @@ export default function Footer() {
       <p className="app-name">WorkflowHub Lite — Gestion de tâches</p>
 
       {/* Social Icons */}
-      <div className="social-icons">
+      {/* <div className="social-icons">
         <a href="https://www.instagram.com/username" target="_blank" rel="noopener noreferrer">
           <FaInstagram />
         </a>
@@ -18,7 +18,7 @@ export default function Footer() {
         <a href="https://github.com/username" target="_blank" rel="noopener noreferrer">
           <FaGithub />
         </a>
-      </div>
+      </div> */}
 
       <p className="copyright">© 2025 WorkflowHub Studio. Tous droits réservés.</p>
     </footer>

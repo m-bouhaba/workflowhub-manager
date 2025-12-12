@@ -45,7 +45,6 @@ const TasksColumn = ({ title, status, tasks, onEdit, onDelete, showAddButton, on
             ))}
             {provided.placeholder}
 
-
           </div>
         )}
       </Droppable>
