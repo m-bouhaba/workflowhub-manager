@@ -11,29 +11,19 @@
     {
       "id": "2",
       "title": "API integration",
-      "priority": "high",
-      "status": "in-progress",
-      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio delectus ipsa pariatur tempora dolorum voluptatum magnam, odit similique quo esse officiis sed explicabo quidem velit, natus autem ea, cupiditate id!",
+      "priority": "medium",
+      "status": "done",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio delectus ipsa pariatur tempora dolorum voluptatum magnam, odit similique quo esse officiis sed explicabo quidem velit, natus autem ea, cupiditate id! Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio delectus ipsa pariatur tempora dolorum voluptatum magnam, odit similique quo esse officiis sed explicabo quidem velit, natus autem ea, cupiditate id! Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio delectus ipsa pariatur tempora dolorum voluptatum magnam, odit similique quo esse officiis sed explicabo quidem velit, natus autem ea, cupiditate id!Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio delectus ipsa pariatur tempora dolorum voluptatum magnam, odit similique quo esse officiis sed explicabo quidem velit, natus autem ea, cupiditate id!",
       "order": 1
-    },
-    {
-      "id": "3",
-      "title": "Fix navbar bug",
-      "description": "Navbar not closing on mobile session",
-      "priority": "low",
-      "status": "todo",
-      "order": 2
     },
     {
       "id": "4",
       "title": "Write unit tests",
-      "description": "Add tests for the task manager module",
       "priority": "medium",
-      "status": "done",
+      "status": "in-progress",
+      "description": "Add tests for the task manager module",
       "order": 1
-    }
-  ],
-  "trash": [
+    },
     {
       "id": "101",
       "title": "Old documentation cleanup",
@@ -51,24 +41,33 @@
       "order": 2
     },
     {
-      "id": "104",
-      "title": "maryam",
-    },
-    {
-      "id": "102",
-      "title": "Deleted",
-      "priority": "low",
-      "status": "in-progress",
-      "description": "Remove outdated doc files from the project",
-      "order": 1
-    },
-    {
       "id": "f0f0",
       "title": "Cigma design",
       "priority": "high",
       "status": "done",
       "description": "description about the Cigma design",
       "order": 2
+    },
+    {
+      "id": "104",
+      "title": "maryam",
+      "order": 1
+    },
+    {
+      "id": "3",
+      "title": "Fix navbar bug",
+      "description": "Navbar not closing on mobile session",
+      "priority": "low",
+      "status": "todo",
+      "order": 2
+    },
+    {
+      "id": "7667",
+      "title": "asdb",
+      "priority": "medium",
+      "status": "todo",
+      "description": "sadbasasdfbav asdf asd asdga sdg acvb srt",
+      "order": 3
     },
     {
       "id": "ad9c",
@@ -79,29 +78,5 @@
       "order": 2
     }
   ],
-  "trash": [
-    {
-      "id": "101",
-      "title": "Old documentation cleanup",
-      "description": "Remove outdated doc files from the project",
-      "priority": "low",
-      "status": "todo",
-      "order": 1
-    },
-    {
-      "id": "1765443505607",
-      "title": "2342",
-      "priority": "medium",
-      "status": "in-progress",
-      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio delectus ipsa pariatur tempora dolorum voluptatum magnam, odit similique quo esse officiis sed explicabo quidem velit, natus autem ea, cupiditate id!",
-      "order": 1
-    },
-    {
-      "id": "1765443526834",
-      "title": "erhw",
-      "priority": "high",
-      "status": "done",
-      "description": "twerhwer"
-    }
-  ]
+  "trash": []
 }

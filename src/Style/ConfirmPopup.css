@@ -1,0 +1,83 @@
+/* ConfirmationModal.css */
+
+/* Reuse the overlay style from TaskModal.css */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+}
+
+.confirmation-modal-container {
+  background-color: white;
+  /* Create the light blue gradient effect at the top */
+  background-image: linear-gradient(to bottom, #eef6fc 0%, #ffffff 30%);
+  padding: 30px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.confirmation-title {
+  color: #0b4673;
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.confirmation-message {
+  color: #555;
+  font-size: 1rem;
+  margin-bottom: 25px;
+  line-height: 1.4;
+}
+
+.confirmation-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* Common button styles */
+.confirmation-buttons button {
+  padding: 10px 30px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  min-width: 100px;
+}
+
+/* Cancel Button (White) */
+.cancel-btn {
+  background-color: white;
+  border: 1px solid #d0e1f0;
+  color: #0b4673;
+}
+
+.cancel-btn:hover {
+  background-color: #f7fbff;
+  border-color: #0b4673;
+}
+
+.confirm-btn {
+  background-color: #0b4673;
+  border: none;
+  color: white;
+}
+
+.confirm-btn:hover {
+  background-color: #083557;
+  box-shadow: 0 4px 12px rgba(11, 70, 115, 0.2);
+}

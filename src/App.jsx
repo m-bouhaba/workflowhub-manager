@@ -3,10 +3,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./Components/Navbar";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import React from "react";
-
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Trash from "./Pages/Trash";
+import Footer from "./Components/Footer";
 
 
 function App() {
@@ -18,13 +18,15 @@ function App() {
           <Route path="/home" element={<Home />} />
           <Route path="/trash" element={<Trash />} />
         </Routes>
+        <Footer/>
         
       </BrowserRouter>
-     
-   );
- }
 
-  
+  );
+}
+
+  export default App;
+
 
 
 
