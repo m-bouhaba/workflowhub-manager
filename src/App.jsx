@@ -1,37 +1,30 @@
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import "./App.css";
-import Home from "./Pages/Home";
-import Trash from "./Pages/Trash";
-import Login from "./Pages/Login";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import Navbar from "./Components/Navbar";
-import Footer from "./Components/Footer";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import React from "react";
+
+import Home from "./Pages/Home";
+import Login from "./Pages/Login";
+import Trash from "./Pages/Trash";
+
 
 function App() {
-  const location = useLocation();
-
-  return (
-    <>
-      <Navbar />
-
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/trash" element={<Trash />} />
-      </Routes>
-
-      {location.pathname !== "/" && <Footer />}
-    </>
-  );
-}
-
-export default function AppWrapper() {
   return (
     <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  );
-}
+      <Navbar/>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/trash" element={<Trash />} />
+        </Routes>
+        
+      </BrowserRouter>
+     
+   );
+ }
 
+  
 
 
 

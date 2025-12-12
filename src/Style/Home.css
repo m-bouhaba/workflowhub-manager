@@ -1,0 +1,80 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+.home-page {
+  background: linear-gradient(180deg, #D9EAFD 0%, #FFFFFF 100%);
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* The 'W' Box Logo */
+.logo-box {
+  width: 40px;
+  height: 40px;
+  background-color: #104e8b; /* Dark Blue */
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px; /* Slight roundness */
+}
+
+.app-title {
+  color: #104e8b;
+  font-size: 1.8rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.welcome-text {
+  color: #104e8b;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.trash-icon-wrapper {
+  position: relative;
+  cursor: pointer;
+  color: #104e8b;
+}
+
+.badge {
+  position: absolute;
+  top: -5px;
+  right: -8px;
+  background-color: #104e8b;
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 0.7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.board {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 50px 50px 50px;
+  gap: 30px;
+}
