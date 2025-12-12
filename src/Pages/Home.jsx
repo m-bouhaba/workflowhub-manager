@@ -2,12 +2,11 @@ import React, { useState, useEffect } from "react";
 import TasksColumn from "../Components/TasksColumn"; 
 import TaskModal from "../Components/AddEditPopup"; 
 import "../Style/Home.css"; 
-// Note: Navbar is now in App.jsx, usually you don't need it here unless specific layout
+import Navbar from "../Components/Navbar";
 import { DragDropContext } from "@hello-pangea/dnd";
 
-// Receive onTrashUpdate from props
-const HomePage = ({ onTrashUpdate }) => {
-    
+const HomePage = () => {
+
   const [tasks, setTasks] = useState([]);
   // Removed local trashCount state!
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,9 +20,12 @@ const HomePage = ({ onTrashUpdate }) => {
       try {
         const tasksRes = await fetch(`${API_URL}/tasks`);
         const tasksData = await tasksRes.json();
-        setTasks(tasksData.sort((a, b) => a.order - b.order));
-        
-        // We don't fetch trash here anymore, App.jsx handles it
+
+        setTasks(tasksData);
+
+        const trashRes = await fetch(`${API_URL}/trash`);
+        const trashData = await trashRes.json();
+        setTrashCount(trashData.length);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -42,107 +44,216 @@ const HomePage = ({ onTrashUpdate }) => {
     setIsModalOpen(true);
   };
 
-  // --- 2. DELETE LOGIC ---
+  // --- DELETE LOGIC ---
   const handleDelete = async (id) => {
     const taskToTrash = tasks.find((t) => t.id === id);
     if (!taskToTrash) return;
 
     try {
-      // A. Add to Trash
       await fetch(`${API_URL}/trash`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(taskToTrash),
       });
 
-      // B. Delete from Tasks
       await fetch(`${API_URL}/tasks/${id}`, { method: "DELETE" });
 
-      // C. Re-order logic...
-      // (Your existing re-order logic stays here...)
-      
-      // D. Update UI
-      setTasks((prev) => prev.filter((t) => t.id !== id));
-      
-      // *** TRIGGER PARENT UPDATE ***
-      if (onTrashUpdate) onTrashUpdate(); 
+      const tasksToUpdate = tasks.filter(
+        (t) => t.status === taskToTrash.status && t.order > taskToTrash.order
+      );
 
+      await Promise.all(
+        tasksToUpdate.map((t) =>
+          fetch(`${API_URL}/tasks/${t.id}`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ order: t.order - 1 }),
+          })
+        )
+      );
+
+      setTasks((prev) =>
+        prev
+          .filter((t) => t.id !== id)
+          .map((t) => {
+            if (t.status === taskToTrash.status && t.order > taskToTrash.order) {
+              return { ...t, order: t.order - 1 };
+            }
+            return t;
+          })
+      );
+
+      setTrashCount((prev) => prev + 1);
     } catch (error) {
       console.error("Error moving to trash:", error);
     }
   };
 
-  // --- 3. Save Logic ---
+  // --- ADD & EDIT LOGIC ---
   const handleSave = async (taskData) => {
     // ... (Your existing handleSave code remains exactly the same) ...
     // Just pasting the core logic for brevity
     try {
       if (taskData.id) {
-         // Edit logic
-         const response = await fetch(`${API_URL}/tasks/${taskData.id}`, {
-           method: "PUT",
-           headers: { "Content-Type": "application/json" },
-           body: JSON.stringify(taskData),
-         });
-         const updatedTask = await response.json();
-         setTasks((prev) => prev.map((t) => (t.id === updatedTask.id ? updatedTask : t)));
+        const response = await fetch(`${API_URL}/tasks/${taskData.id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(taskData),
+        });
+
+        const updatedTask = await response.json();
+
+        setTasks((prev) =>
+          prev.map((t) => (t.id === updatedTask.id ? updatedTask : t))
+        );
       } else {
-         // Add logic
-         // ... calc order ...
-         const response = await fetch(`${API_URL}/tasks`, {
-           method: "POST",
-           headers: { "Content-Type": "application/json" },
-           body: JSON.stringify(taskData), // Ensure you passed the full object
-         });
-         const savedTask = await response.json();
-         setTasks((prev) => [...prev, savedTask]);
+        const tasksInSameColumn = tasks.filter(
+          (t) => t.status === taskData.status
+        );
+
+        const maxOrder =
+          tasksInSameColumn.length > 0
+            ? Math.max(...tasksInSameColumn.map((t) => t.order || 0))
+            : 0;
+
+        const newTaskPayload = {
+          ...taskData,
+          order: maxOrder + 1,
+        };
+
+        const response = await fetch(`${API_URL}/tasks`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(newTaskPayload),
+        });
+
+        const savedTask = await response.json();
+
+        setTasks((prev) => [...prev, savedTask]);
       }
+
       setIsModalOpen(false);
     } catch (error) {
       console.error("Error saving task:", error);
     }
   };
 
-  const handleDragEnd = (result) => {
-    // ... (Your existing drag logic remains exactly the same) ...
-  };
+  // --- DRAG & DROP LOGIC ---
+const handleDragEnd = async (result) => {
+  const { source, destination } = result;
+  if (!destination) return;
+
+  const sourceTasks = tasks
+    .filter((t) => t.status === source.droppableId)
+    .sort((a, b) => a.order - b.order);
+  const destTasks = tasks
+    .filter((t) => t.status === destination.droppableId)
+    .sort((a, b) => a.order - b.order);
+
+  // Déplacer dans la même colonne
+  if (source.droppableId === destination.droppableId) {
+    const [movedTask] = sourceTasks.splice(source.index, 1);
+    sourceTasks.splice(destination.index, 0, movedTask);
+
+    // Mettre à jour les order
+    const updatedTasks = tasks.map((t) => {
+      if (t.status === source.droppableId) {
+        const index = sourceTasks.findIndex((st) => st.id === t.id);
+        if (index !== -1) {
+          const newOrder = index + 1;
+          if (t.order !== newOrder) {
+            // Update sur serveur
+            fetch(`${API_URL}/tasks/${t.id}`, {
+              method: "PATCH",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ order: newOrder }),
+            });
+          }
+          return { ...t, order: newOrder };
+        }
+      }
+      return t;
+    });
+
+    setTasks(updatedTasks);
+    return;
+  }
+
+  // Déplacer entre colonnes
+  const [movedTask] = sourceTasks.splice(source.index, 1);
+  movedTask.status = destination.droppableId;
+  destTasks.splice(destination.index, 0, movedTask);
+
+  const updatedTasks = tasks.map((t) => {
+    // Update order et status si nécessaire
+    if (t.id === movedTask.id) return movedTask;
+
+    if (t.status === source.droppableId) {
+      const index = sourceTasks.findIndex((st) => st.id === t.id);
+      if (index !== -1) return { ...t, order: index + 1 };
+    }
+
+    if (t.status === destination.droppableId) {
+      const index = destTasks.findIndex((dt) => dt.id === t.id);
+      if (index !== -1) return { ...t, order: index + 1 };
+    }
+
+    return t;
+  });
+
+  // Persist les order et status sur serveur
+  updatedTasks.forEach((t) => {
+    fetch(`${API_URL}/tasks/${t.id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ order: t.order, status: t.status }),
+    });
+  });
+
+  setTasks(updatedTasks);
+};
+
+
 
   return (
-     <div className="home-page">
-        <DragDropContext onDragEnd={handleDragEnd}>
-          <div className="board">
-            <TasksColumn 
-              title="To Do" 
-              status="todo" 
-              tasks={tasks.sort((a,b) => a.order - b.order)} 
-              onEdit={handleEdit} 
-              onDelete={handleDelete}
-              showAddButton={true}
-              onAdd={handleAddNew}
-            />
-            <TasksColumn 
-              title="In Progress" 
-              status="in-progress" 
-              tasks={tasks.sort((a,b) => a.order - b.order)} 
-              onEdit={handleEdit} 
-              onDelete={handleDelete}
-            />
-            <TasksColumn 
-              title="Done" 
-              status="done" 
-              tasks={tasks.sort((a,b) => a.order - b.order)} 
-              onEdit={handleEdit} 
-              onDelete={handleDelete}
-            />
-          </div>
-        </DragDropContext>
+    <div className="home-page">
+      <DragDropContext onDragEnd={handleDragEnd}>
+        <div className="board">
+          <TasksColumn
+            title="To Do"
+            status="todo"
+            tasks={tasks}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+            showAddButton={true}
+            onAdd={handleAddNew}
+          />
+
+          <TasksColumn
+            title="In Progress"
+            status="in-progress"
+            tasks={tasks}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+          />
+
+          <TasksColumn
+            title="Done"
+            status="done"
+            tasks={tasks}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+          />
+        </div>
+      </DragDropContext>
+
       <TaskModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onSave={handleSave}
         taskToEdit={currentTask}
       />
-     </div>
+    </div>
   );
 };
 
