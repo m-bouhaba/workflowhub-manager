@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import '../Style/Login.css';
@@ -5,59 +6,86 @@ import '../Style/Footer.css';
 
 export default function Login({ setUsername }) {  
 
-  const [error, setError] = useState(""); 
-
   const [formData, setFormData] = useState({
-    username:"",
-    email:"",
-    password:""
+    username: "",
+    email: "",
+    password: ""
   });
 
-  const handleChange=(e) =>{
-    const {name,value } = e.target
-    setFormData((prev) =>({
-        ...prev,
-        [name] : value
-    }))
-  }
-
+  const [error, setError] = useState({});
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
 
-    if(formData.username === "" || formData.email === "" || formData.password === ""){
-      setError("All fields are required");
+    
+    if(name === "email") {
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.com$/;
+      if(!emailRegex.test(value)) {
+        setError(prev => ({ ...prev, email: "Invalid email" }));
+      } else {
+        setError(prev => ({ ...prev, email: "" }));
+      }
     } else {
-      setError("");
-      setUsername(formData.username);        
-      localStorage.setItem("username", formData.username); 
-      navigate("/home");   
+      setError(prev => ({ ...prev, [name]: "" }));
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    let errors = {};
+    let hasError = false;
+
+    if(!formData.username.trim()) {
+      errors.username = "Username is required";
+      hasError = true;
+    }
+
+    if(!formData.email.trim()) {
+      errors.email = "Email is required";
+      hasError = true;
+    }
+
+    if(!formData.password.trim()) {
+      errors.password = "Password is required";
+      hasError = true;
+    }
+
+    if(hasError || error.email) {
+      setError(prev => ({ ...prev, ...errors }));
+      return;
+    }
+
+    
+    setUsername(formData.username);
+    localStorage.setItem("username", formData.username);
+    navigate("/home");
+  };
+
   return (
-    <div className='login-container'>
-      <div className='image-container'>
+    <div className="login-container">
+      <div className="image-container">
         <img src="/login.png" alt="WorkflowHub Logo" />
       </div>
 
-      <div className='form-container'>
-        <form className='login-form' onSubmit={handleSubmit}>
-          
+      <div className="form-container">
+        <form className="login-form" onSubmit={handleSubmit}>
+
           <label>Username:</label>
-          <input type="text" value={formData.username} name='username' onChange={handleChange} placeholder="Enter username" />
+          <input type="text" name="username" value={formData.username} onChange={handleChange} />
+          {error.username && <p className="error-message">{error.username}</p>}
 
           <label>Email:</label>
-          <input type="email"value={formData.email} name='email' onChange={handleChange} placeholder="Enter email" />
+          <input type="text" name="email" value={formData.email} onChange={handleChange} />
+          {error.email && <p className="error-message">{error.email}</p>}
 
           <label>Password:</label>
-          <input type="password" value={formData.password} name='password' onChange={handleChange} placeholder="Enter password" />
-
-          {error && <p className="error-message">{error}</p>}
+          <input type="password" name="password" value={formData.password} onChange={handleChange} />
+          {error.password && <p className="error-message">{error.password}</p>}
 
           <button type="submit">Login</button>
-      
+
         </form>
       </div>
     </div>
@@ -67,6 +95,95 @@ export default function Login({ setUsername }) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  
  
  
@@ -133,40 +250,8 @@ export default function Login({ setUsername }) {
 
 
 
-// import React from 'react'
-// import '../Style/Login.css';  
-// import { useState } from 'react';
 
 
 
 
-//  const [username, setUsername] = useState("");
-// const [password, setPassword] = useState("");
 
-
-// export default function Login() {
-
-
-//   return (
-//     <div className='login-container'>
-//       <div className='image-container'>
-//         <img src="login.png" alt="WorkflowHub Logo" />
-//       </div>
-//       <div className='form-container'>
-//         <form className='login-form'>
-//             <h2>Sign Up</h2>  
-           
-//           <label htmlFor="username">Username:</label>
-//           <input type="text" id="username" name="username" placeholder=" Enter email" value={Username} onChange={(e) => setUsername(e.target.value)}required />
-         
-//           <label htmlFor="password">Password:</label>
-//           <input type="password" id="password" name="password" placeholder="Enter password" value={password} onChange={(e) => setPassword(e.target.value)}required />
-           
-//           <button type="submit">Login</button>
-         
-//         </form>  
-//       </div>
-//       </div>
-    
-//   );
-// }

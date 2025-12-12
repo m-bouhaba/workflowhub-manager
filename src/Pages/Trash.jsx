@@ -1,33 +1,32 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "../Style/Trash.css";
 import axios from "axios";
-import Navbar from "../Components/Navbar";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
-import ConfirmationModal from "../Components/ConfirmPopup"; 
+import ConfirmPopup from "../Components/ConfirmPopup";
 
-export default function Trash() {
+export default function Trash({ onTrashUpdate }) {
   const [search, setSearch] = useState("");
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // --- Modal State ---
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const [confirmAction, setConfirmAction] = useState({ type: null, taskId: null });
 
-  const API_URL = "http://localhost:5000"; 
+  const API_URL = "http://localhost:5000";
 
   useEffect(() => {
     axios
       .get(`${API_URL}/trash`)
       .then((res) => {
-        const sorted = res.data.sort((a, b) => a.order - b.order);
+        // Sort data safely
+        const sorted = res.data.sort((a, b) => (a.order || 0) - (b.order || 0));
         setData(sorted);
       })
       .catch((err) => console.log(err))
       .finally(() => setLoading(false));
   }, []);
 
-  // --- 1. Initiate Actions (Open Modal) ---
   const initiateRestore = (id) => {
     setConfirmAction({ type: 'restore', taskId: id });
     setIsConfirmOpen(true);
@@ -38,19 +37,19 @@ export default function Trash() {
     setIsConfirmOpen(true);
   };
 
-  // --- 2. Execute Actions (API Calls) ---
   const executeRestore = async () => {
     const id = confirmAction.taskId;
     try {
       const task = data.find((t) => t.id === id);
       if (!task) return;
 
-      // Add back to tasks
       await axios.post(`${API_URL}/tasks`, task);
-      // Remove from trash
       await axios.delete(`${API_URL}/trash/${id}`);
 
       setData(data.filter((t) => t.id !== id));
+
+      if (onTrashUpdate) onTrashUpdate();
+
     } catch (error) {
       console.log("Erreur restore :", error);
     }
@@ -61,23 +60,26 @@ export default function Trash() {
     try {
       await axios.delete(`${API_URL}/trash/${id}`);
       setData(data.filter((t) => t.id !== id));
+
+      if (onTrashUpdate) onTrashUpdate();
+
     } catch (error) {
       console.log("Erreur delete :", error);
     }
   };
 
-  // --- 3. Confirm Handler (Passed to Modal) ---
   const handleConfirm = () => {
     if (confirmAction.type === 'restore') {
       executeRestore();
     } else if (confirmAction.type === 'delete') {
       executePermanentDelete();
     }
-    // Modal closes automatically via onClose in the component
   };
 
-  // Filter Tasks
+  // --- FIX 1: Filter out tasks that have no ID ---
   const filtered = data.filter((task) =>
+    task &&
+    task.id != null &&
     task.title.toLowerCase().includes(search.toLowerCase())
   );
 
@@ -90,18 +92,26 @@ export default function Trash() {
 
     setData(items);
 
-    // Save new order to JSON-server
+    // Save order
     for (let i = 0; i < items.length; i++) {
-      await axios.patch(`${API_URL}/trash/${items[i].id}`, {
-        order: i,
-      });
+      if (items[i] && items[i].id) {
+        await axios.patch(`${API_URL}/trash/${items[i].id}`, {
+          order: i,
+        });
+      }
     }
   };
 
   return (
     <div className="TrashPage">
-
       <div className="TrashContent">
+
+        <div className="trash-header">
+          <Link to="/home" className="return-btn">
+            <i className="fa-solid fa-arrow-left"></i> Return
+          </Link>
+        </div>
+
         {loading ? (
           <div className="ImageLoader">
             <img src="/loading1.gif" alt="Loading..." className="LoaderGif" />
@@ -131,7 +141,8 @@ export default function Trash() {
                         filtered.map((task, index) => (
                           <Draggable
                             key={task.id}
-                            draggableId={task.id.toString()}
+                            // --- FIX 2: Use String() wrapper instead of .toString() ---
+                            draggableId={String(task.id)}
                             index={index}
                           >
                             {(provided) => (
@@ -147,14 +158,12 @@ export default function Trash() {
                                 </div>
 
                                 <div className="TaskActions">
-                                  {/* Restore Icon - Triggers Modal */}
                                   <img
                                     src="/restore.png"
                                     alt="Restore"
                                     className="ActionIcon"
                                     onClick={() => initiateRestore(task.id)}
                                   />
-                                  {/* Delete Icon - Triggers Modal */}
                                   <img
                                     src="/delete.png"
                                     alt="Delete permanently"
@@ -177,8 +186,7 @@ export default function Trash() {
         )}
       </div>
 
-      {/* The Confirmation Modal */}
-      <ConfirmationModal
+      <ConfirmPopup
         isOpen={isConfirmOpen}
         onClose={() => setIsConfirmOpen(false)}
         onConfirm={handleConfirm}

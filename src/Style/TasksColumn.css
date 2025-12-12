@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   background-color: #d9eafd;
-  border-radius: 12px;
+  border-radius: 17px;
 }
 
 .column-header {
@@ -20,6 +20,7 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
+  margin-bottom: 5px;
 }
 
 /* The Add Task Button Style */
