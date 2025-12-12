@@ -37,22 +37,6 @@
       "order": 4
     },
     {
-      "id": "3",
-      "title": "Fix navbar bug",
-      "priority": "low",
-      "status": "done",
-      "description": "Navbar not closing on mobile session",
-      "order": 1
-    },
-    {
-      "id": "1",
-      "title": "Design login page",
-      "priority": "high",
-      "status": "todo",
-      "description": "Create the UI layout for the login screen",
-      "order": 0
-    },
-    {
       "id": "101",
       "title": "Old documentation cleanup",
       "description": "Remove outdated doc files from the project",
@@ -67,16 +51,6 @@
       "status": "in-progress",
       "description": "Create the UI layout for the login screen",
       "order": 0
-    }
-  ],
-  "trash": [
-    {
-      "id": "ad9c",
-      "title": "test",
-      "priority": "medium",
-      "status": "done",
-      "description": "asdbasrf3e",
-      "order": 1
     },
     {
       "id": "2",
@@ -87,12 +61,38 @@
       "order": 0
     },
     {
+      "id": "1",
+      "title": "Design login page",
+      "priority": "high",
+      "status": "todo",
+      "description": "Create the UI layout for the login screen",
+      "order": 0
+    }
+  ],
+  "trash": [
+    {
       "id": "4",
       "title": "Write unit tests",
       "description": "Add tests for the task manager module",
       "priority": "medium",
       "status": "done",
       "order": 2
+    },
+    {
+      "id": "ad9c",
+      "title": "test",
+      "priority": "medium",
+      "status": "done",
+      "description": "asdbasrf3e",
+      "order": 1
+    },
+    {
+      "id": "3",
+      "title": "Fix navbar bug",
+      "priority": "low",
+      "status": "done",
+      "description": "Navbar not closing on mobile session",
+      "order": 1
     }
   ]
 }
