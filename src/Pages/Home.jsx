@@ -90,21 +90,25 @@ const HomePage = ({ onTrashUpdate }) => {
   };
 
   // --- ADD & EDIT LOGIC ---
+  // --- ADD & EDIT LOGIC ---
   const handleSave = async (taskData) => {
     try {
       if (taskData.id) {
-        // EDIT
+        // --- EDIT MODE (Keep ID) ---
         const response = await fetch(`${API_URL}/tasks/${taskData.id}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(taskData),
         });
         const updatedTask = await response.json();
+
         setTasks((prev) =>
           prev.map((t) => (t.id === updatedTask.id ? updatedTask : t))
         );
       } else {
-        // ADD
+        // --- ADD MODE (Remove ID so server generates it) ---
+
+        // 1. Calculate Order
         const tasksInSameColumn = tasks.filter(
           (t) => t.status === taskData.status
         );
@@ -113,8 +117,12 @@ const HomePage = ({ onTrashUpdate }) => {
             ? Math.max(...tasksInSameColumn.map((t) => t.order || 0))
             : 0;
 
+        // 2. CRITICAL FIX: Extract 'id' out so we don't send 'id: null'
+        const { id, ...dataWithoutId } = taskData;
+
+        // 3. Create payload without ID
         const newTaskPayload = {
-          ...taskData,
+          ...dataWithoutId,
           order: maxOrder + 1,
         };
 
@@ -123,9 +131,11 @@ const HomePage = ({ onTrashUpdate }) => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(newTaskPayload),
         });
+
         const savedTask = await response.json();
         setTasks((prev) => [...prev, savedTask]);
       }
+
       setIsModalOpen(false);
     } catch (error) {
       console.error("Error saving task:", error);
@@ -139,7 +149,7 @@ const HomePage = ({ onTrashUpdate }) => {
 
     // Create a copy of tasks to manipulate
     let newTasks = Array.from(tasks);
-    
+
     // Filter out tasks by column to calculate indices accurately
     const sourceColumnTasks = newTasks
       .filter(t => t.status === source.droppableId)
@@ -148,21 +158,21 @@ const HomePage = ({ onTrashUpdate }) => {
     const destColumnTasks = (source.droppableId === destination.droppableId)
       ? sourceColumnTasks
       : newTasks
-          .filter(t => t.status === destination.droppableId)
-          .sort((a, b) => a.order - b.order);
+        .filter(t => t.status === destination.droppableId)
+        .sort((a, b) => a.order - b.order);
 
     // Identify the moved task
     const movedTask = sourceColumnTasks[source.index];
 
     // Remove from source array locally
     // (We use IDs to find and manipulate the big list)
-    
+
     // Simple approach: Update properties locally then sync
     if (source.droppableId === destination.droppableId) {
       // Reordering in same column
       sourceColumnTasks.splice(source.index, 1);
       sourceColumnTasks.splice(destination.index, 0, movedTask);
-      
+
       // Update orders based on new array index
       const updates = sourceColumnTasks.map((t, index) => ({
         ...t,
@@ -177,8 +187,8 @@ const HomePage = ({ onTrashUpdate }) => {
 
     } else {
       // Moving between columns
-      const sourceTasksList = newTasks.filter(t => t.status === source.droppableId).sort((a,b)=>a.order-b.order);
-      const destTasksList = newTasks.filter(t => t.status === destination.droppableId).sort((a,b)=>a.order-b.order);
+      const sourceTasksList = newTasks.filter(t => t.status === source.droppableId).sort((a, b) => a.order - b.order);
+      const destTasksList = newTasks.filter(t => t.status === destination.droppableId).sort((a, b) => a.order - b.order);
 
       // Remove from source
       sourceTasksList.splice(source.index, 1);
@@ -187,15 +197,15 @@ const HomePage = ({ onTrashUpdate }) => {
       destTasksList.splice(destination.index, 0, movedTask);
 
       // Recalculate orders for BOTH columns
-      const sourceUpdates = sourceTasksList.map((t, index) => ({...t, order: index + 1}));
-      const destUpdates = destTasksList.map((t, index) => ({...t, order: index + 1}));
+      const sourceUpdates = sourceTasksList.map((t, index) => ({ ...t, order: index + 1 }));
+      const destUpdates = destTasksList.map((t, index) => ({ ...t, order: index + 1 }));
 
       // Merge back
       newTasks = newTasks.map(t => {
         const sUp = sourceUpdates.find(u => u.id === t.id);
-        if(sUp) return sUp;
+        if (sUp) return sUp;
         const dUp = destUpdates.find(u => u.id === t.id);
-        if(dUp) return dUp;
+        if (dUp) return dUp;
         return t;
       });
     }
@@ -205,15 +215,15 @@ const HomePage = ({ onTrashUpdate }) => {
     // Persist changes to server (Naive approach: update changed tasks)
     // For simplicity in this project, we can loop through the changed columns
     newTasks.forEach(t => {
-        // Optimization: Only patch if necessary could be done here, 
-        // but for safety we patch the tasks in the affected columns.
-        if(t.status === source.droppableId || t.status === destination.droppableId) {
-             fetch(`${API_URL}/tasks/${t.id}`, {
-                method: "PATCH",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ order: t.order, status: t.status }),
-             });
-        }
+      // Optimization: Only patch if necessary could be done here, 
+      // but for safety we patch the tasks in the affected columns.
+      if (t.status === source.droppableId || t.status === destination.droppableId) {
+        fetch(`${API_URL}/tasks/${t.id}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ order: t.order, status: t.status }),
+        });
+      }
     });
   };
 

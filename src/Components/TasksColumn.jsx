@@ -12,16 +12,12 @@ const TasksColumn = ({ title, status, tasks, onEdit, onDelete, showAddButton, on
     <div className="column">
       <div className="column-header">{title}</div>
       {/* Add Button at the bottom of the list if enabled */}
-            {showAddButton && (
-              <div className="add-task-btn" onClick={onAdd}>
-                <span>Add Task</span>
-                <img 
-                  src="/icons8-add-50.png" 
-                  className="addIcon" 
-                  alt="Add" 
-                />
-              </div>
-            )}
+      {showAddButton && (
+        <div className="add-task-btn" onClick={onAdd}>
+          <span>Add Task</span>
+          <div className="plus-box">+</div>
+        </div>
+      )}
       <Droppable droppableId={status}>
         {(provided) => (
           <div
@@ -49,7 +45,7 @@ const TasksColumn = ({ title, status, tasks, onEdit, onDelete, showAddButton, on
             ))}
             {provided.placeholder}
 
-            
+
           </div>
         )}
       </Droppable>

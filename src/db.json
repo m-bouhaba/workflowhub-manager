@@ -1,44 +1,20 @@
 {
   "tasks": [
     {
-      "id": "2",
-      "title": "API integration",
+      "id": "cb34",
+      "title": "task 1",
+      "priority": "medium",
+      "status": "in-progress",
+      "description": "asdbasdfa fds afdsf asdbsb adff gsdf asdv asd\nasdbasdfa fds afdsf asdbsb adff gsdf asdv asd\nasdbasdfa fds afdsf asdbsb adff gsdf asdv asd\nasdbasdfa fds afdsf asdbsb adff gsdf asdv asd\nasdbasdfa fds afdsf asdbsb adff gsdf asdv asdasdbasdfa fds afdsf asdbsb adff gsdf asdv asdasdbasdfa fds afdsf asdbsb adff gsdf asdv asdasdbasdfa fds afdsf asdbsb adff gsdf asdv asdasdbasdfa fds afdsf asdbsb adff gsdf asdv asdasdbasdfa fds afdsf asdbsb adff gsdf asdv asdasdbasdfa fds afdsf asdbsb adff gsdf asdv asdasdbasdfa fds afdsf asdbsb adff gsdf asdv asdasdbasdfa fds afdsf asdbsb adff gsdf asdv asdasdbasdfa fds afdsf asdbsb adff gsdf asdv asdasdbasdfa fds afdsf asdbsb adff gsdf asdv asd",
+      "order": 1
+    },
+    {
+      "id": "e49e",
+      "title": "task 2",
       "priority": "high",
       "status": "todo",
-      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio delectus ipsa pariatur tempora dolorum voluptatum magnam, odit similique quo esse officiis sed explicabo quidem velit, natus autem ea, cupiditate id!",
+      "description": "",
       "order": 1
-    },
-    {
-      "id": "f0f0",
-      "title": "Cigma design",
-      "priority": "high",
-      "status": "in-progress",
-      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio delectus ipsa pariatur tempora dolorum voluptatum magnam, odit similique quo esse officiis sed explicabo quidem velit, natus autem ea, cupiditate id!",
-      "order": 2
-    },
-    {
-      "id": "101",
-      "title": "Old documentation cleanup",
-      "description": "Remove outdated doc files from the project",
-      "priority": "low",
-      "status": "done",
-      "order": 1
-    },
-    {
-      "id": "3",
-      "title": "Fix navbar bug",
-      "priority": "low",
-      "status": "in-progress",
-      "description": "Navbar not closing on mobile session",
-      "order": 1
-    },
-    {
-      "id": null,
-      "title": "12332111232",
-      "priority": "low",
-      "status": "in-progress",
-      "description": "asdbasdfasd fasd fasd f as dasd f",
-      "order": 2
     }
   ],
   "trash": []
