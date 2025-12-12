@@ -3,9 +3,9 @@
     {
       "id": "1",
       "title": "Design login page",
+      "priority": "medium",
+      "status": "in-progress",
       "description": "Create the UI layout for the login screen",
-      "priority": "high",
-      "status": "todo",
       "order": 0
     },
     {
@@ -17,36 +17,20 @@
       "order": 1
     },
     {
-      "id": "3",
-      "title": "Fix navbar bug",
-      "description": "Navbar not closing on mobile session",
-      "priority": "low",
-      "status": "todo",
-      "order": 2
-    },
-    {
       "id": "4",
       "title": "Write unit tests",
-      "priority": "medium",
+      "priority": "low",
       "status": "in-progress",
       "description": "Add tests for the task manager module",
       "order": 1
     },
     {
-      "id": "101",
-      "title": "Old documentation cleanup",
-      "description": "Remove outdated doc files from the project",
-      "priority": "low",
-      "status": "todo",
-      "order": 0
-    },
-    {
       "id": "103",
       "title": "deleted",
-      "description": "Remove outdated doc files from the project",
-      "priority": "low",
+      "priority": "high",
       "status": "todo",
-      "order": 2
+      "description": "Remove outdated doc files from the project",
+      "order": 1
     },
     {
       "id": "f0f0",
@@ -55,13 +39,21 @@
       "status": "done",
       "description": "description about the Cigma design",
       "order": 2
+    },
+    {
+      "id": "101",
+      "title": "Old documentation cleanup",
+      "priority": "low",
+      "status": "todo",
+      "description": "Remove outdated doc files from the projectRemove outdated doc files from the projectRemove outdated doc files from the projectRemove outdated doc files from the projectRemove outdated doc files from the projectRemove outdated doc files from the project",
+      "order": 0
     }
   ],
   "trash": [
     {
       "id": "104",
       "title": "maryam",
-      "order": 1
+      "order": 2
     },
     {
       "id": "ad9c",
@@ -69,7 +61,7 @@
       "priority": "medium",
       "status": "done",
       "description": "asdbasrf3e",
-      "order": 2
+      "order": 1
     },
     {
       "id": "7667",
@@ -77,7 +69,7 @@
       "priority": "medium",
       "status": "todo",
       "description": "sadbasasdfbav asdf asd asdga sdg acvb srt",
-      "order": 3
+      "order": 0
     }
   ]
 }
