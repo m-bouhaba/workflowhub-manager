@@ -16,22 +16,6 @@
       "status": "todo",
       "order": 1
     },
-  
-    {
-      "id": "1765443333014",
-      "title": "title",
-      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio delectus ipsa pariatur tempora dolorum voluptatum magnam, odit similique quo esse officiis sed explicabo quidem velit, natus autem ea, cupiditate id!"
-    },
-    {
-      "id": "1765443346030",
-      "title": "vadsba",
-      "description": "asdasdbasdfad"
-    },
-    {
-      "id": "1765443551906",
-      "title": "rwehwertwer",
-      "description": "twerhwertrw"
-    },
     {
       "id": "4",
       "title": "Write unit tests",
@@ -44,8 +28,16 @@
       "id": "1",
       "title": "Design login page",
       "priority": "high",
+      "status": "done",
+      "description": "Create the UI layout for the login screen ",
+      "order": 0
+    },
+    {
+      "id": "6",
+      "title": "add drag and drop",
+      "priority": "high",
       "status": "todo",
-      "description": "Create the UI layout for the login screen",
+      "description": "Create the UI layout for the login screen ",
       "order": 0
     }
   ],
@@ -65,11 +57,6 @@
       "priority": "low",
       "status": "todo",
       "order": 2
-    },
-    {
-      "id": "104",
-      "title": "maryam",
-      "order": 1
     },
     {
       "id": "102",
