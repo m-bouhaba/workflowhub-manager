@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./Components/Navbar";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import React from "react";
-
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Trash from "./Pages/Trash";
@@ -20,9 +19,9 @@ function App() {
         </Routes>
         
       </BrowserRouter>
-     
-   );
- }
+
+  );
+}
 
   
 

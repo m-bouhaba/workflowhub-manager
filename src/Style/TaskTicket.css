@@ -1,54 +1,105 @@
+/* TaskTicket.css */
+
 .task-card {
+  background-color: white; /* Changed from dynamic color to White */
   border-radius: 12px;
   padding: 20px;
+  margin: 0 5px;
   min-height: 120px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05); /* Soft shadow */
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
+  border: 1px solid transparent;
 }
 
 .task-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  border-color: #dbe4f3;
 }
 
-/* The exact pastel colors from your image */
-.card-pink { background-color: #ffeaea; }  /* High Priority */
-.card-cream { background-color: #fff9e6; } /* Medium Priority */
-.card-green { background-color: #eafff0; } /* Low Priority */
-
+/* Header Layout */
 .card-header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center; /* Align vertically */
 }
 
 .task-title {
   margin: 0;
-  color: #444;
-  font-weight: 600;
+  color: #2c5c75; /* Dark blue-grey text from image */
+  font-weight: 700;
   font-size: 1rem;
+  /* Ensure title doesn't overlap actions if it's long */
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 60%; 
 }
 
+/* Container for Badge + Delete Icon */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* --- PRIORITY BADGES --- */
+.priority-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 6px;
+  text-transform: capitalize;
+  display: inline-block;
+}
+
+/* Colors matching the uploaded image */
+.badge-high {
+  background-color: #ffadb0; /* Light Red/Pink */
+  color: #a81c1c; /* Dark Red Text */
+}
+
+.badge-medium {
+  background-color: #ffeeb3; /* Light Yellow */
+  color: #d68900; /* Dark Orange/Gold Text */
+}
+
+.badge-low {
+  background-color: #d1ffcc; /* Light Green */
+  color: #1a8f27; /* Dark Green Text */
+}
+
+/* --- DELETE BUTTON --- */
 .delete-btn {
   background: none;
   border: none;
-  font-size: 1.2rem;
   cursor: pointer;
-  opacity: 0.5;
-  transition: opacity 0.2s;
+  color: #8898aa; /* Grey color for icon */
+  display: flex;
+  align-items: center;
+  padding: 0;
+  transition: color 0.2s;
 }
 
 .delete-btn:hover {
-  opacity: 1;
+  color: #d32f2f; /* Turns red on hover */
 }
 
+/* Description Text */
 .task-desc {
   font-size: 0.85rem;
-  color: #666;
-  line-height: 1.4;
+  color: #556e7a; /* Grey-blueish text */
+  line-height: 1.5em;
   margin: 0;
+  
+  /* Truncation Logic */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
